@@ -1,0 +1,73 @@
+//
+// assets/css/layout/_body.scss
+
+body {
+    font-family: $fontFamily;
+    margin: 0px;
+    padding: 0px;
+    font-weight: 300;
+    background: white;
+}
+
+html, body {
+    position: fixed;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+._s {
+    will-change: opacity, transform;
+}
+
+.debug {
+    border: .1px solid #666;
+    box-sizing: content-box;
+    &::after {
+        content: '';
+        position: absolute;
+        @include centerXY();
+        width: 5px;
+        height: 5px;
+        background: red;
+        border-radius: 50%;
+    }
+    * {
+        border: .1px solid #333;
+    }
+}
+
+a, p, h1, h2, h3, h4, h5 {
+    pointer-events: auto;
+}
+
+.input-fade-enter {
+    opacity: 0;
+}
+
+.input-fade-enter-active {
+    will-change: opacity;
+    transition: all .5s ease-out;
+}
+
+.input-fade-enter-to {
+    opacity: .99;
+}
+
+.input-fade-leave {
+    opacity: .99;
+}
+
+.input-fade-leave-active {
+    will-change: opacity;
+    transition: all .5s ease-in;
+}
+
+.input-fade-leave-to {
+    opacity: 0;
+}

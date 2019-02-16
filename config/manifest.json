@@ -1,0 +1,16 @@
+{
+    "head": {
+        "baseTitle": "Nuxt2 Boilerplate | ",
+        "googleUser": "+cmacmillanmarin",
+        "fbUser": "cmacmillanmarin",
+        "twUser": "cmacmillanmarin"
+    },
+    "langs": [
+        "en",
+        "es"
+    ],
+    "routes": [
+        "",
+        "about"
+    ]
+}
