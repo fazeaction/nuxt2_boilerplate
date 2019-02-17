@@ -2,11 +2,16 @@
 // store/index.js
 
 export const state = () => ({
-    browser: false,
-    counter: 1
+    counter: 1,
+    content: {},
+    loaded: false
 })
 
 export const mutations = {
+    setData( state, data ) {
+        state.content = data;
+        state.loaded = true;
+    },
     increment(state) {
         state.counter++;
     },
@@ -16,7 +21,7 @@ export const mutations = {
 }
 
 export const actions = {
-    init ({ commit }) {
-        commit("browser");
+    async setContent({ commit, rootState }) {
+        commit('setData', await this.$axios.$get(`${ process.env.baseUrl }/data/content/${ rootState.lang.locale }.json`))
     }
 }

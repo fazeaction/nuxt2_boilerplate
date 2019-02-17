@@ -7,15 +7,15 @@ export default {
     },
     mounted() {
         this.init();
-        this.setListeners();
+        this.addListeners();
     },
     methods: {
         setInitValue() {},
         init() {},
-        setListeners() {},
-        destroyListeners()  {}
+        addListeners() {},
+        removeListeners()  {}
     },
     beforeDestroy() {
-        this.destroyListeners();
+        this.removeListeners();
     }
 };

@@ -1,9 +1,9 @@
 <!--
-    pages/_lang/about.vue
+    pages/_lang/contact.vue
 -->
 
 <template>
-    <div class="p-about">
+    <div class="p-contact">
         <p v-text="head.title" />
     </div>
 </template>
@@ -15,14 +15,14 @@
     import Transitions from "~/mixins/Transitions";
 
     export default {
-        name: "about",
+        name: "contact",
         mixins: [ Head, LifecycleHooks, Transitions ],
         async asyncData ({ app }) {
             return {
                 head: {
-                    title: app.i18n.t('p-about:title'),
+                    title: app.i18n.t('p-contact:title'),
                     meta: {
-                        description: app.i18n.t('p-about:description')
+                        description: app.i18n.t('p-contact:description')
                     }
                 }
             };
@@ -33,7 +33,7 @@
 
 <style lang="scss" scoped>
 
-    .p-about {
+    .p-contact {
         padding: 20px;
     }
 

@@ -12,7 +12,7 @@ export default ({ app, store }) => {
     let messages = {};
 
     Config.langs.forEach(lang => {
-        messages[lang] = require('~/data/copy/' + lang + '.json');
+        messages[lang] = require('~/static/data/copy/' + lang + '.json');
     });
 
     app.i18n = new VueI18n({

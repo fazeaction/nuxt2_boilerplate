@@ -15,7 +15,7 @@
             <div class="flexGrid__cell _3 _alignRight _end">
                 <ul>
                     <li v-for="(lang, i) in langs" :key="i">
-                        <nuxt-link :to="{ params: { lang }}" v-text="lang" />
+                        <a :href="`${ baseUrl }/${ lang }`" v-text="lang" />
                     </li>
                 </ul>
             </div>
@@ -34,6 +34,11 @@
                 langs: state => state.lang.locales,
                 counter: state => state.counter
             })
+        },
+        data() {
+            return {
+                baseUrl: process.env.baseUrl
+            }
         },
         watch: {
             $route() {

@@ -2,35 +2,52 @@
 //  components/types/mixins/Transition.js
 
 import { TweenLite } from "gsap";
+import { 
+    Events,
+    TRANSITION_ENTER, 
+    TRANSITION_ENTER_DONE, 
+    TRANSITION_LEAVE,
+    TRANSITION_LEAVE_DONE 
+} from "~/assets/js/controllers/Events";
 
 export default {
     transition: {
-
         css: false,
-        appear: true,
         mode: "out-in",
-        routeName: "",
-
-        beforeLeave(el) {},
-        leave(el, done) {
-
-            this.routeName !== this.$route.name
-                ? TweenLite.to(el, 0.25, { opacity: 0, onComplete: done })
-                : done();
+        beforeLeave() {
+            Events.dispatchEvent( TRANSITION_LEAVE );
         },
-        leaveCancelled(el) { TweenLite.killTweensOf(el); },
-        afterLeave(el) {},
-
-        beforeEnter(el) {
-            this.routeName = this.$route.name
-            TweenLite.set(el, { opacity: 0, willChange: "opacity" })
+        leave(el, done) {
+            TweenLite.to(
+                el,
+                .25,
+                {
+                    opacity: 0,
+                    ease: Power3.easeOut,
+                    onComplete: () => {
+                        done();
+                        Events.dispatchEvent( TRANSITION_LEAVE_DONE );
+                    }
+                }
+            )
+        },
+        beforeEnter( el ) {
+            TweenLite.set( el, { opacity: 0 });
+            Events.dispatchEvent( TRANSITION_ENTER );
         },
         enter(el, done) {
-
-            TweenLite.to(el, 1, { opacity: 1, onComplete: done })
-        },
-        enterCancelled(el) { TweenLite.killTweensOf(el); },
-        afterEnter(el) {}
-
+            TweenLite.to(
+                el,
+                .5,
+                {
+                    opacity: 1,
+                    ease: Power3.easeOut,
+                    onComplete: () => {
+                        done();
+                        Events.dispatchEvent( TRANSITION_ENTER_DONE );
+                    }
+                }
+            )
+        }
     }
 }

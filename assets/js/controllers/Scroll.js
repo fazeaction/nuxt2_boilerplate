@@ -89,8 +89,8 @@ class Scroll {
         else this.vars.direction = -1;
 
         this.vs._emitter.emit( "direction", this.vars.direction );
-        this.vs._emitter.emit( "scrolling", parseFloat(( this.vars.scrollPosition ).toFixed(2)) );
-        this.vs._emitter.emit( "scrollingOffset", parseFloat(( this.vars.scrollOffsetPosition ).toFixed(2)) );
+        this.vs._emitter.emit( "scrolling", this.vars.scrollPosition );
+        this.vs._emitter.emit( "scrollingOffset", this.vars.scrollOffsetPosition );
         this.vs._emitter.emit( "elasticity", this.vars.elasticity );
 
         const _current = -this.vars.scrollPosition;

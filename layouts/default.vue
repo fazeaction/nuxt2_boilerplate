@@ -3,30 +3,36 @@
 -->
 
 <template>
-    <div class="l-default">
-        <organism-header ref="header" />
-        <div ref="scroll" class="__content">
-            <nuxt class="page" ref="page" />
-            <organism-footer class="footer" ref="footer" />
+    <div class="__content">
+        <div ref="scroll" class="__scroll" v-if="loaded">
+            <organism-header class="_s" ref="header" />
+            <nuxt class="_s" ref="page" />
+            <organism-footer class="_s" ref="footer" />
+            <scroll-bar />
         </div>
     </div>
 </template>
 
 <script>
 
-    import { mapState, mapMutations } from "vuex";
+    import { mapState, mapMutations, mapActions } from "vuex";
 
     import LifecycleHooks from "~/mixins/LifecycleHooks";
 
+    import ScrollBar from "~/components/atoms/ScrollBar";
     import OrganismHeader from "~/components/organisms/Header";
     import OrganismFooter from "~/components/organisms/Footer";
+
+    import { Events, TRANSITION_ENTER_DONE, TRANSITION_LEAVE_DONE } from "~/assets/js/controllers/Events";
 
     export default {
         name: "default",
         middleware: "i18n",
-        mixins: [LifecycleHooks],
+        mixins: [ LifecycleHooks ],
         computed: {
             ...mapState({
+                loaded: state => state.loaded,
+                lang: state => state.lang.locale,
                 scrollPoint: state => state.scroll.point,
                 scrollActive: state => state.scroll.active,
                 verticalScroll: state => state.scroll.vertical,
@@ -35,12 +41,10 @@
                 resize: state => state.device.resize
             })
         },
-        data() {
-            return {
-                ready: false
-            }
-        },
         watch: {
+            loaded() {
+                this.$nextTick( this.appStart );
+            },
             updateScroll() {
                 this.scroll.resize();
             },
@@ -56,19 +60,20 @@
             }
         },
         methods: {
-            init() {
+            appStart() {
                 this.scroll = new Scroll({
                     section: this.$refs.scroll,
                     native: false,
                     skew: false,
                     ease: 0
                 });
-                this.setScrollDomEl(this.$refs.scroll);
+                this.setScrollDomEl( this.$refs.scroll );
                 this.scroll.vs._emitter.on("scrolling", this.setScrollPoint);
                 this.scroll.vs._emitter.on("direction", this.setDirection);
-                this.scroll.vs._emitter.on("elasticity", this.setElasticity);
                 this.scroll.vs._emitter.on("vertical", this.setVertical);
+                this.scroll.vs._emitter.on("size", this.setHeight);
                 this.scroll.init();
+                this.setScrollActive( true );
             },
             entered() {
                 this.scroll.reset();
@@ -94,15 +99,20 @@
                 Events.removeEventListener(TRANSITION_ENTER_DONE, this.enterHandler);
                 Events.removeEventListener(TRANSITION_LEAVE_DONE, this.leaveHandler);
             },
+            ...mapActions({
+                setContent: "setContent"
+            }),
             ...mapMutations({
                 setScrollActive: "scroll/setActive",
                 setScrollDomEl: "scroll/setDomEl",
                 setScrollPoint: "scroll/setPoint",
                 setDirection: "scroll/setDirection",
-                setVertical: "scroll/setVertical"
+                setVertical: "scroll/setVertical",
+                setHeight: "scroll/setHeight"
             })
         },
         components: {
+            ScrollBar,
             OrganismHeader,
             OrganismFooter
         }
@@ -119,12 +129,6 @@
             position: relative;
             opacity:1;
             z-index: 1;
-            &.horizontal {
-                display: inline-block;
-            }
-            .page {
-                min-height: 50vh;
-            }
         }
     }
 

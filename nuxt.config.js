@@ -13,6 +13,7 @@ Manifest.langs.forEach(lang => {
 });
 
 module.exports = {
+    
     env: {
         preview: process.env.SPA,
         generate: process.env.GENERATE,
@@ -21,6 +22,7 @@ module.exports = {
         CONFIG: process.env.CONFIG,
         MANIFEST: process.env.MANIFEST,
     },
+
     router: {
         base: process.env.BASE,
     },
@@ -28,7 +30,6 @@ module.exports = {
     plugins: Config.plugins,
 
     modules: [
-        // Doc: https://axios.nuxtjs.org/usage
         '@nuxtjs/pwa',
         '@nuxtjs/axios',
         '@nuxtjs/style-resources'
@@ -36,15 +37,13 @@ module.exports = {
 
     styleResources: {
         scss: [
-            'assets/css/style.scss'
+            'assets/css/_abs.scss'
         ]
     },
 
     css: ["@/assets/css/style.scss"],
 
-    axios: {
-        // See https://github.com/nuxt-community/axios-module#options
-    },
+    loading: false,
 
     build: {
         uglify: {

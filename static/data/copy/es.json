@@ -18,11 +18,6 @@
     "o-footer:visited-pages": "Páginas visitadas: ",
     "o-footer:clear-history": "Limpiar historial",
 
-    "m-events:times": "vez/veces!",
-    "m-events:utils:description": "Eventos funcionando con utils/controller/Events.js",
-    "m-events:vuex:description": "Eventos funcionando con vuex: vuex/events.js",
-    "m-events:a:talks:b": "Hablar a B",
-    "m-events:b:talks:a": "Hablar a A",
-    "m-events:a:listen:b": "Hola A! Soy B, ya te he hablado ",
-    "m-events:b:listen:a": "Hola B! Soy A, ya te he hablado "
+    "g:placeholder-image:alt": "Base 64 placeholder, encuentralo en github"
+
 }

@@ -3,13 +3,14 @@
 
 import EventDispatcher from "~/assets/js/core/EventDispatcher.js";
 
-export let EVENT_NAME_A = "event_key_a";
-export let EVENT_NAME_B = "event_key_b";
+export let TRANSITION_ENTER = "transition_enter";
+export let TRANSITION_ENTER_DONE = "transition_enter_done";
+export let TRANSITION_LEAVE = "transition_leave";
+export let TRANSITION_LEAVE_DONE = "transition_leave_done";
 
 class DefaultEvents extends EventDispatcher {
     constructor() {
         super();
-        console.log("Default Events :: init");
     }
 }
 

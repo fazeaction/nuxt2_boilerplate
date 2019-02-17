@@ -1,0 +1,47 @@
+{
+    "header": {
+        "nav": [
+            { "route": { "name": "lang" }, "label": "p-index:name" },
+            { "route": { "name": "lang-about" }, "label": "p-about:name" },
+            { "route": { "name": "lang-contact" }, "label": "p-contact:name" }
+        ]
+    },
+    "pages": {
+        "home": {
+            "head": {
+                "title": "p-contact:head:title",
+                "description": "p-contact:head:description"
+            }
+        },
+        "about": {
+            "head": {
+                "title": "p-contact:head:title",
+                "description": "p-contact:head:description"
+            }
+        },
+        "contact": {
+            "head": {
+                "title": "p-contact:head:title",
+                "description": "p-contact:head:description"
+            }
+        }
+    },
+    "footer": {
+        "nav": [
+            { "route": { "name": "lang" }, "label": "p-index:name" },
+            { "route": { "name": "lang-about" }, "label": "p-about:name" },
+            { "route": { "name": "lang-contact" }, "label": "p-contact:name" }
+        ]
+    },
+    "images": {
+        "placeholder-image": {
+            "src": "img/placeholder/base64.png",
+            "alt": "g:placeholder-image:alt",
+            "size": {
+                "desktop": { "w": 512, "h": 512 },
+                "tablet": { "w": 512, "h": 512 },
+                "mobile": { "w": 512, "h": 512 }
+            }
+        }
+    }
+}

@@ -42,8 +42,8 @@ export default class EventDispatcher {
 
     dispatchEvent(event, data) {
 
-        const params = data.params;
-        const target = data.target;
+        const params = data ? data.params : null;
+        const target = data ? data.target : null;
 
         if (this._listeners === undefined) return;
 

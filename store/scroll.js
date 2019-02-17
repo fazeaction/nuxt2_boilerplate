@@ -7,7 +7,8 @@ export const state = () => ({
     point: 0,
     scrollTo: 0,
     direction: 1,
-    vertical: true
+    vertical: true,
+    height: 0
 });
 
 export const mutations = {
@@ -28,5 +29,8 @@ export const mutations = {
     },
     setVertical(state, vertical) {
         state.vertical = vertical;
+    },
+    setHeight(state, size) {
+        state.height = size.h;
     }
 };

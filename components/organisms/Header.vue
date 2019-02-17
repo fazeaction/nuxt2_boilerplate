@@ -3,7 +3,7 @@
 -->
 
 <template>
-    <header class="o-header _s">
+    <header class="o-header">
         <div class="flexGrid _horizontal">
             <div class="flexGrid__cell _2 _alignLeft">
                 <nuxt-link :to="{ name: `lang`, params: { lang }}">
