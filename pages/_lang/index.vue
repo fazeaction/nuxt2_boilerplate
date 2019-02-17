@@ -10,7 +10,7 @@
 
 <script>
 
-    import { mapState } from "vuex";
+    import { mapState } from "vuex";
 
     import Head from "~/mixins/Head";
     import LifecycleHooks from "~/mixins/LifecycleHooks";
@@ -23,18 +23,8 @@
         mixins: [ Head, LifecycleHooks, Transitions ],
         computed: {
             ...mapState({
-                content: state => state.content
+                head: state => state.content.pages.home.head
             })
-        },
-        async asyncData({ app }) {
-            return {
-                head: {
-                    title: app.i18n.t('p-index:title'),
-                    meta: {
-                        description: app.i18n.t('p-index:description')
-                    }
-                }
-            }
         },
         components: {
             ImgBase

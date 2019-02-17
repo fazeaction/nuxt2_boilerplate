@@ -3,21 +3,13 @@
 -->
 
 <template>
-    <img class="a-logo" :src="data.src" :alt="data.alt" />
+    <img class="a-logo" src="img/logo.jpg" :alt="$t('o-header:assets:logo:alt')" />
 </template>
 
 <script>
 
-    const data = { src: "./img/logo.jpg", alt: "o-header:assets:logo:alt" };
-
     export default {
-        name: "Logo",
-        props: {
-            data: {
-                type: Object,
-                default: () => data
-            }
-        }
+        name: "Logo"
     }
 
 </script>

@@ -4,11 +4,13 @@
 
 <template>
     <div class="p-about">
-        <p v-text="head.title" />
+        <p v-text="$t( head.title )" />
     </div>
 </template>
 
 <script>
+
+    import { mapState } from "vuex";
 
     import Head from "~/mixins/Head";
     import LifecycleHooks from "~/mixins/LifecycleHooks";
@@ -17,15 +19,10 @@
     export default {
         name: "about",
         mixins: [ Head, LifecycleHooks, Transitions ],
-        async asyncData ({ app }) {
-            return {
-                head: {
-                    title: app.i18n.t('p-about:title'),
-                    meta: {
-                        description: app.i18n.t('p-about:description')
-                    }
-                }
-            };
+        computed: {
+            ...mapState({
+                head: state => state.content.pages.about.head
+            })
         }
     }
 

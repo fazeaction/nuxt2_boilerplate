@@ -3,22 +3,13 @@
 -->
 
 <template>
-    <nuxt-link class="a-button" :to="{ name: data.anchor, params: { lang }}" v-text="$t(data.label)" />
+    <nuxt-link class="a-button" :to="data.route" v-text="$t( data.label )" />
 </template>
 
 <script>
 
-    const data = { label: "Button", anchor: "/" };
-
-    import { mapState } from "vuex";
-
     export default {
         name: "Button",
-        computed: {
-            ...mapState({
-                lang: state => state.lang.locale
-            })
-        },
         props: {
             data: {
                 type: Object,

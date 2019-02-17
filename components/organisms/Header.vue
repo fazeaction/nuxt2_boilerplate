@@ -13,25 +13,13 @@
             <div class="flexGrid__cell _2 _alignRight _end">
                 <p v-text="`${$t('o-header:device')}: ${platform}`" />
                 <p v-text="`WebGL: ${webGLSupported}`" />
-                <molecule-list :data="data.molecules.list" />
+                <molecule-list :data="data.nav" />
             </div>
         </div>
     </header>
 </template>
 
 <script>
-
-    const data = {
-        molecules: {
-            list: {
-                atoms: {
-                    buttons: [
-                        { label: "p-about:name", anchor: "lang-about" }
-                    ]
-                }
-            }
-        }
-    }
 
     import { mapState } from "vuex";
 
@@ -43,15 +31,11 @@
         computed: {
             ...mapState({
                 lang: state => state.lang.locale,
+                data: state => state.content.header,
                 breakpoint: state => state.device.breakpoint,
                 platform: state => state.device.specs.platform,
                 webGLSupported: state => state.device.specs.webGLSupported
             })
-        },
-        data() {
-            return {
-                data
-            }
         },
         watch: {
             breakpoint() {

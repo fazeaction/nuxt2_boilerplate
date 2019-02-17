@@ -9,9 +9,9 @@
     "p-about:title": "About title",
     "p-about:description": "About SEO description.",
     "p-about:profile:title": "Check profile",
-    "p-events:name": "Events",
-    "p-events:title": "Events title",
-    "p-events:description": "Events SEO description.",
+    "p-contact:name": "Contact",
+    "p-contact:title": "Contact title",
+    "p-contact:description": "Contact SEO description.",
 
     "o-header:device": "Device",
     "o-header:assets:logo:alt": "English logo description",

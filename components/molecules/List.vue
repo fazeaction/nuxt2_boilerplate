@@ -4,23 +4,13 @@
 
 <template>
     <ul class="m-list">
-        <li v-for="(button, i) in data.atoms.buttons" :key="i" class="item">
-            <atom-button :data="button" class="button"/>
+        <li v-for="(button, i) in data" :key="i" class="item">
+            <atom-button :data="button" class="button" />
         </li>
     </ul>
 </template>
 
 <script>
-
-    const data = {
-        atoms: {
-            buttons: [
-                { label: "Button 1", anchor: "/" },
-                { label: "Button 2", anchor: "/" },
-                { label: "Button 3", anchor: "/" }
-            ]
-        }
-    };
 
     import AtomButton from "~/components/atoms/Button";
 
@@ -28,8 +18,8 @@
         name: "List",
         props: {
             data: {
-                type: Object,
-                default: () => data
+                type: Array,
+                default: () => []
             }
         },
         components: {
