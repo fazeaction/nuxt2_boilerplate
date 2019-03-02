@@ -1,9 +1,8 @@
 //
-// plugins/Checks.js
+// plugins/Store.js
 
 export default ({ store }) => {
 
     store.dispatch("setContent");
-    store.dispatch("mouse/init");
     store.dispatch("device/init");
 }

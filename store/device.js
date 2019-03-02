@@ -23,7 +23,7 @@ export const state = () => ({
     resize: true,
     viewportSize: { w: 0, h: 0 },
 
-    _DEBOUNCE: null
+    _HANDLER: null
 })
 
 export const mutations = {
@@ -41,8 +41,8 @@ export const mutations = {
         state.assetSufix = assetSufix;
     },
 
-    setDebounce( state, debounce ) {
-        state._DEBOUNCE = debounce;
+    setHandler( state, handler ) {
+        state._HANDLER = handler;
     },
 
     setViewport( state, { w, h } ){
@@ -63,7 +63,7 @@ export const actions = {
 
         commit("setViewport", { w, h } );
         commit("setDevice", detect() );
-        commit("setDebounce", () => { dispatch("_updateBreakpoint") });
+        commit("setHandler", _ => { dispatch("_updateBreakpoint") });
 
         dispatch("checkDevice");
         dispatch("checkWebGL");
@@ -72,8 +72,8 @@ export const actions = {
 
     startWatching({ state }){
 
-        window.addEventListener("resize", state._DEBOUNCE );
-        state._DEBOUNCE();
+        window.addEventListener("resize", state._HANDLER );
+        state._HANDLER();
     },
 
     _updateBreakpoint({ state, commit }) {

@@ -1,8 +1,8 @@
 //
 // plugins/i18n.js
 
-import Vue from 'vue';
-import VueI18n from 'vue-i18n';
+import Vue from "vue";
+import VueI18n from "vue-i18n";
 import Config from "~/config/manifest";
 
 Vue.use(VueI18n);
@@ -12,7 +12,7 @@ export default ({ app, store }) => {
     let messages = {};
 
     Config.langs.forEach(lang => {
-        messages[lang] = require('~/static/data/copy/' + lang + '.json');
+        messages[lang] = require("~/static/data/copy/" + lang + ".json");
     });
 
     app.i18n = new VueI18n({

@@ -5,10 +5,11 @@ export const state = () => ({
     el: null,
     active: false,
     point: 0,
+    update: 0,
     scrollTo: 0,
     direction: 1,
     vertical: true,
-    height: 0
+    size: { w: 0, h: 0 }
 });
 
 export const mutations = {
@@ -31,6 +32,10 @@ export const mutations = {
         state.vertical = vertical;
     },
     setHeight(state, size) {
-        state.height = size.h;
+        state.size.w = size.w;
+        state.size.h = size.h;
+    },
+    updateScroll() {
+        state.update = !state.update;
     }
 };

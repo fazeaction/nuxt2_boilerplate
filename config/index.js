@@ -13,6 +13,10 @@ module.exports = {
             ssr: false
         },
         {
+            src: "~/plugins/Mouse.js",
+            ssr: false
+        },
+        {
             src: "~/assets/js/controllers/Scroll.js",
             ssr: false
         }

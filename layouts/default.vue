@@ -36,6 +36,7 @@
                 scrollPoint: state => state.scroll.point,
                 scrollActive: state => state.scroll.active,
                 verticalScroll: state => state.scroll.vertical,
+                updateScroll: state => state.scroll.update,
                 breakpoint: state => state.device.breakpoint,
                 viewportSize: state => state.device.viewportSize,
                 resize: state => state.device.resize
@@ -84,10 +85,10 @@
                 this.setScrollActive( false );
             },
             setSize() {
-                console.log( this.viewportSize.w, this.viewportSize.h );
+                // console.log( this.viewportSize.w, this.viewportSize.h );
             },
             scrolling() {
-                console.log( this.scrollPoint );
+                // console.log( this.scrollPoint );
             },
             addListeners() {
                 this.enterHandler = this.entered.bind(this);

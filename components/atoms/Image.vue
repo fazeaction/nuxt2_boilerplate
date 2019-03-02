@@ -5,6 +5,7 @@
 <template>
     <div class="a-image" :class="{ cover }">
         <img ref="img" :src="src" :alt="$t( image.alt )" />
+        <p class="label" v-html="`<strong>src</strong>: ${ src }`" />
     </div>
 </template>
 
@@ -126,10 +127,16 @@
             }
         }
         img {
+            border: 1px solid $lightGrey;
             width: 100%;
             display: block;
             margin: 0;
             padding: 0;
+        }
+        .label {
+            margin: 20px auto;
+            font-size: 13px;
+            text-align: center;
         }
     }
 </style>

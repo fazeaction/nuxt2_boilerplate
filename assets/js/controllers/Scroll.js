@@ -84,12 +84,12 @@ class Scroll {
         this.vars.scrollPosition = this.vars.current;
         this.vars.scrollOffsetPosition = this.vars.currentOffset;
 
-        if ( Math.ceil(this.vars.scrollPosition) === Math.ceil(this.vars.prevPosition) && Math.ceil(this.vars.prevOffsetPosition) === Math.ceil(this.vars.scrollOffsetPosition) ) return;
-        else if ( this.vars.scrollOffsetPosition > this.vars.prevOffsetPosition ) this.vars.direction = 1;
-        else this.vars.direction = -1;
+        if ( this.isNotUpdated() ) return;
+        
+        this.vars.direction = this.vars.scrollOffsetPosition > this.vars.prevOffsetPosition ? 1 : -1;
 
         this.vs._emitter.emit( "direction", this.vars.direction );
-        this.vs._emitter.emit( "scrolling", this.vars.scrollPosition );
+        this.vs._emitter.emit( "scrolling", this.vars.scrollPosition.toFixed(4) );
         this.vs._emitter.emit( "scrollingOffset", this.vars.scrollOffsetPosition );
         this.vs._emitter.emit( "elasticity", this.vars.elasticity );
 
@@ -124,6 +124,10 @@ class Scroll {
         this.vars.prevOffsetPosition = this.vars.scrollOffsetPosition;
     }
 
+    isNotUpdated() {
+        return (this.vars.scrollPosition).toFixed(4) === (this.vars.prevPosition).toFixed(4) && (this.vars.prevOffsetPosition).toFixed(4) === (this.vars.scrollOffsetPosition).toFixed(4)
+    }
+
     isVerticalScroll( child ) {
         return ( this.vars.vertical && !child.opposite ) || ( !this.vars.vertical && child.opposite )
     }
@@ -139,7 +143,7 @@ class Scroll {
     }
 
     scrollTo(val, anim = false) {
-        if (!anim) {
+        if ( !anim ) {
             this.vars.current = val;
             this.vars.currentOffset = val;
             this.vs._emitter.emit("scrolling", val);
