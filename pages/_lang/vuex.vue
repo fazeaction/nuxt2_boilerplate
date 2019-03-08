@@ -4,31 +4,40 @@
 
 <template>
     <div class="p-vuex">
-        <div class="flexGrid">
-            <div class="flexGrid__cell _1"><h2 v-text="$t('p-vuex:title')" /></div>
-            <div class="flexGrid__cell" :class="{ _1: isMobile, _3: !isMobile }">
-                <h2 v-text="$t('p-vuex:device:title')" />
-                <pre v-html="device" />
-            </div>
-            <div class="flexGrid__cell" :class="{ _1: isMobile, _3: !isMobile }">
-                <h2 v-text="$t('p-vuex:mouse:title')" />
-                <pre v-html="mouse" />
-            </div>
-            <div class="flexGrid__cell" :class="{ _1: isMobile, _3: !isMobile }">
-                <h2 v-text="$t('p-vuex:scroll:title')" />
-                <pre v-html="scroll" />
-            </div>
+        <div class="_s"><h2 v-text="$t('p-vuex:title')" /></div>
+        <div class="_s">
+            <h2 v-text="$t('p-vuex:device:title')" />
+            <pre v-html="device" />
         </div>
+        <div class="_s">
+            <h2 v-text="$t('p-vuex:lang:title')" />
+            <pre v-html="lang" />
+        </div>
+        <div class="_s">
+            <h2 v-text="$t('p-vuex:mouse:title')" />
+            <pre v-html="mouse" />
+        </div>
+        <div class="_s">
+            <h2 v-text="$t('p-vuex:scroll:title')" />
+            <pre v-html="scroll" />
+        </div>
+        <section-component :n="1" class="_s" />
+        <section-component :n="2" class="_s" />
+        <section-component :n="3" class="_s" />
     </div>
 </template>
 
 <script>
 
-    import { mapState } from "vuex";
+    import { mapState, mapMutations } from "vuex";
+
+    import { Events, TRANSITION_ENTER_DONE } from "~/assets/js/controllers/Events";
 
     import Head from "~/mixins/Head";
     import LifecycleHooks from "~/mixins/LifecycleHooks";
     import Transitions from "~/mixins/Transitions";
+    
+    import SectionComponent from "~/components/atoms/Section";
 
     export default {
         name: "vuex",
@@ -37,22 +46,33 @@
             ...mapState({
                 head: state => state.content.pages.vuex.head,
                 device: state => state.device,
+                lang: state => state.lang,
                 mouse: state => state.mouse,
-                scroll: state => state.scroll
+                scroll: state => state.scroll,
+                horizontal: state => state.scroll.horizontalScroll
             })
         },
-        data() {
-            return {
-                isMobile: false
-            }
+        methods: {
+            enter() {
+                this.setScrollDirection( this.horizontal );
+                this.setScrollActive( true );
+                this.setScrollTo( 50 );
+            },
+            addListeners() {
+                this.enterHandler = this.enter.bind( this );
+                Events.addEventListener( TRANSITION_ENTER_DONE, this.enterHandler );
+            },
+            removeListeners() {
+                Events.removeEventListener( TRANSITION_ENTER_DONE, this.enterHandler );
+            },
+            ...mapMutations({
+                setScrollActive: "scroll/setActive",
+                setScrollDirection: "scroll/setScrollDirection",
+                setScrollTo: "scroll/updateScrollTo"
+            })
         },
-        watch: {
-            breakpoint: {
-                handler: function() {
-                    this.isMobile = this.device.breakpoint.includes("mobile");
-                },
-                immediate: true
-            }
+        components: {
+            SectionComponent
         }
     }
 
@@ -61,7 +81,15 @@
 <style lang="scss" scoped>
 
     .p-vuex {
-        padding: 20px;
+        padding: $menuHeight 20px 20px;
+        white-space: nowrap;
+        display: inline-block;
+        > div {
+            padding: 20px 0px;
+            display: inline-block;
+            vertical-align: top;
+            width: 33.333333%;
+        }
     }
 
 </style>

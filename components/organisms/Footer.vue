@@ -60,6 +60,7 @@
     .o-footer {
         padding: 20px 20px 50px;
         border-top: 1px solid $lightGrey;
+        width: 100vw;
         p, a {
             font-size: 12px;
         }

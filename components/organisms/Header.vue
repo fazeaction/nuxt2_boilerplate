@@ -53,10 +53,15 @@
 <style lang="scss" scoped>
 
     .o-header {
-
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: 10;
         border-bottom: 1px solid;
         border-color: lime;
+        background: white;
         padding: 20px;
+        height: $menuHeight;
 
         @include respond-to("mobile-landscape") {
             border-color: $lightGrey;

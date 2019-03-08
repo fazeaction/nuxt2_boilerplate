@@ -12,6 +12,7 @@
     "p-vuex:description": "Descripción SEO Vuex.",
     "p-vuex:device:title": "Dispositivo",
     "p-vuex:mouse:title": "Mouse",
+    "p-vuex:lang:title": "Idiomas",
     "p-vuex:scroll:title": "Scroll",
 
     "p-contact:name": "Contacto",

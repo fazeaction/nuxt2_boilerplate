@@ -5,24 +5,26 @@
 <template>
     <div class="p-home">
         <div class="flexGrid">
-            <div class="flexGrid__cell _1"><h1 v-text="`Nuxt2 BurundangaStudio Boilerplate`" /></div>
-            <div class="flexGrid__cell" :class="{ _1: isMobile, _3: !isMobile }">
+            <div class="flexGrid__cell _1 _s"><h1 v-text="`Nuxt2 BurundangaStudio Boilerplate`" /></div>
+            <div class="flexGrid__cell _s" :class="{ _1: isMobile, _3: !isMobile }">
                 <img-base />
             </div>
-            <div class="flexGrid__cell" :class="{ _1: isMobile, _2: !isMobile }">
+            <div class="flexGrid__cell _s" :class="{ _1: isMobile, _2: !isMobile }">
                 <p v-text="$t('p-home:base64:copy')" />
                 <a href="https://github.com/cmacmillanmarin/base_64" rel="noopener" target="_black" v-text="`Github Repo.`" />
             </div>
-            <section-component :n="1" />
-            <section-component :n="2" />
-            <section-component :n="3" />
+            <section-component :n="1" class="_s" />
+            <section-component :n="2" class="_s" />
+            <section-component :n="3" class="_s" />
         </div>
     </div>
 </template>
 
 <script>
 
-    import { mapState } from "vuex";
+    import { mapState, mapMutations } from "vuex";
+
+    import { Events, TRANSITION_ENTER_DONE } from "~/assets/js/controllers/Events";
 
     import Head from "~/mixins/Head";
     import LifecycleHooks from "~/mixins/LifecycleHooks";
@@ -36,8 +38,9 @@
         mixins: [ Head, LifecycleHooks, Transitions ],
         computed: {
             ...mapState({
+                head: state => state.content.pages.home.head,
                 breakpoint: state => state.device.breakpoint,
-                head: state => state.content.pages.home.head
+                vertical: state => state.scroll.verticalScroll
             })
         },
         data() {
@@ -53,6 +56,25 @@
                 immediate: true
             }
         },
+        methods: {
+            enter() {
+                this.setScrollDirection( this.vertical );
+                this.setScrollActive( true );
+                this.setScrollTo( 50 );
+            },
+            addListeners() {
+                this.enterHandler = this.enter.bind( this );
+                Events.addEventListener( TRANSITION_ENTER_DONE, this.enterHandler );
+            },
+            removeListeners() {
+                Events.removeEventListener( TRANSITION_ENTER_DONE, this.enterHandler );
+            },
+            ...mapMutations({
+                setScrollActive: "scroll/setActive",
+                setScrollDirection: "scroll/setScrollDirection",
+                setScrollTo: "scroll/updateScrollTo"
+            })
+        },
         components: {
             ImgBase,
             SectionComponent
@@ -64,7 +86,7 @@
 <style lang="scss" scoped>
 
     .p-home {
-        padding: 0 20px 20px;
+        padding: $menuHeight 20px 20px;
         h1 {
             margin: 20px 0px;
         }

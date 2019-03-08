@@ -10,7 +10,9 @@
 
 <script>
 
-    import { mapState } from "vuex";
+    import { mapState, mapMutations } from "vuex";
+
+    import { Events, TRANSITION_ENTER_DONE } from "~/assets/js/controllers/Events";
 
     import Head from "~/mixins/Head";
     import LifecycleHooks from "~/mixins/LifecycleHooks";
@@ -21,7 +23,25 @@
         mixins: [ Head, LifecycleHooks, Transitions ],
         computed: {
             ...mapState({
-                head: state => state.content.pages.contact.head
+                head: state => state.content.pages.contact.head,
+                vertical: state => state.scroll.verticalScroll
+            })
+        },
+        methods: {
+            enter() {
+                this.setScrollDirection( this.vertical );
+                this.setScrollActive( true );
+            },
+            addListeners() {
+                this.enterHandler = this.enter.bind( this );
+                Events.addEventListener( TRANSITION_ENTER_DONE, this.enterHandler );
+            },
+            removeListeners() {
+                Events.removeEventListener( TRANSITION_ENTER_DONE, this.enterHandler );
+            },
+            ...mapMutations({
+                setScrollActive: "scroll/setActive",
+                setScrollDirection: "scroll/setScrollDirection"
             })
         }
     }
@@ -31,7 +51,10 @@
 <style lang="scss" scoped>
 
     .p-contact {
-        padding: 20px;
+        padding: $menuHeight 20px 20px;
+        p {
+            padding: 20px 0 0;
+        }
     }
 
 </style>

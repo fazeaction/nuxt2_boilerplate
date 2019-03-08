@@ -8,7 +8,9 @@ export const state = () => ({
     update: 0,
     scrollTo: 0,
     direction: 1,
-    vertical: true,
+    vertical: undefined,
+    verticalScroll: "vertical",
+    horizontalScroll: "horizontal",
     size: { w: 0, h: 0 }
 });
 
@@ -28,8 +30,8 @@ export const mutations = {
     setDirection(state, direction) {
         state.direction = direction;
     },
-    setVertical(state, vertical) {
-        state.vertical = vertical;
+    setScrollDirection(state, value) {
+        state.vertical = value == state.verticalScroll;
     },
     setHeight(state, size) {
         state.size.w = size.w;

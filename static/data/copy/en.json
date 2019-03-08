@@ -8,9 +8,10 @@
     
     "p-vuex:name": "Vuex",
     "p-vuex:title": "Vuex title",
-    "p-vuex:description": "Descripción SEO Vuex.",
-    "p-vuex:device:title": "Dispositivo",
+    "p-vuex:description": "Vuex SEO description.",
+    "p-vuex:device:title": "Device",
     "p-vuex:mouse:title": "Mouse",
+    "p-vuex:lang:title": "Languages",
     "p-vuex:scroll:title": "Scroll",
     
     "p-contact:name": "Contact",

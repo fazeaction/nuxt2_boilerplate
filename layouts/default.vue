@@ -4,10 +4,12 @@
 
 <template>
     <div class="__content">
-        <div ref="scroll" class="__scroll" v-if="loaded">
-            <organism-header class="_s" ref="header" />
-            <nuxt class="_s" ref="page" />
-            <organism-footer class="_s" ref="footer" />
+        <div class="__loaded" v-if="loaded">
+            <organism-header ref="header" />
+            <div ref="scroll" class="__scroll">
+                <nuxt ref="page" />
+                <organism-footer class="_s" ref="footer" />
+            </div>
             <scroll-bar />
         </div>
     </div>
@@ -35,6 +37,7 @@
                 lang: state => state.lang.locale,
                 scrollPoint: state => state.scroll.point,
                 scrollActive: state => state.scroll.active,
+                scrollTo: state => state.scroll.scrollTo,
                 verticalScroll: state => state.scroll.vertical,
                 updateScroll: state => state.scroll.update,
                 breakpoint: state => state.device.breakpoint,
@@ -49,15 +52,27 @@
             updateScroll() {
                 this.scroll.resize();
             },
+            scrollTo() {
+                this.scrollTo > 0 && this.scroll.scrollTo( this.scrollTo, true );
+                this.setScrollTo( -1 );
+            },
+            verticalScroll() {
+                if ( this.verticalScroll ) {
+                    console.log("setVerticalScroll");
+                    this.scroll.vertical();
+                    this.$refs.scroll.classList.remove("horizontal");
+                } else {
+                    console.log("setHorizontalScroll");
+                    this.scroll.horizontal();
+                    this.$refs.scroll.classList.add("horizontal");
+                }
+            },
             scrollActive() {
                 this.scrollActive ? this.scroll.enableScroll() : this.scroll.disableScroll();
             },
             async breakpoint() {
                 await this.$nextTick();
                 this.scroll.resize();
-            },
-            resize() {
-                this.setSize();
             }
         },
         methods: {
@@ -71,24 +86,15 @@
                 this.setScrollDomEl( this.$refs.scroll );
                 this.scroll.vs._emitter.on("scrolling", this.setScrollPoint);
                 this.scroll.vs._emitter.on("direction", this.setDirection);
-                this.scroll.vs._emitter.on("vertical", this.setVertical);
                 this.scroll.vs._emitter.on("size", this.setHeight);
                 this.scroll.init();
-                this.setScrollActive( true );
             },
             entered() {
                 this.scroll.reset();
-                this.setScrollActive( true );
             },
             reset() {
                 this.scroll.scrollTo( 0 );
                 this.setScrollActive( false );
-            },
-            setSize() {
-                console.log( `Viewport Size: ${ this.viewportSize.w, this.viewportSize.h }` );
-            },
-            scrolling() {
-                console.log( `Scroll value: ${ this.scrollPoint }` );
             },
             addListeners() {
                 this.enterHandler = this.entered.bind(this);
@@ -107,8 +113,8 @@
                 setScrollActive: "scroll/setActive",
                 setScrollDomEl: "scroll/setDomEl",
                 setScrollPoint: "scroll/setPoint",
+                setScrollTo: "scroll/updateScrollTo",
                 setDirection: "scroll/setDirection",
-                setVertical: "scroll/setVertical",
                 setHeight: "scroll/setHeight"
             })
         },
@@ -123,13 +129,16 @@
 
 <style lang="scss" scoped>
 
-    .l-default {
+    .__content {
         width: 100%;
         height: 100%;
-        .__content {
+        .__scroll {
             position: relative;
             opacity:1;
             z-index: 1;
+            &.horizontal {
+                display: inline-block;
+            }
         }
     }
 

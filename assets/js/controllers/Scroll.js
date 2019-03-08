@@ -88,6 +88,8 @@ class Scroll {
         
         this.vars.direction = this.vars.scrollOffsetPosition > this.vars.prevOffsetPosition ? 1 : -1;
 
+        console.log( this.vars.current );
+
         this.vs._emitter.emit( "direction", this.vars.direction );
         this.vs._emitter.emit( "scrolling", this.vars.scrollPosition.toFixed(4) );
         this.vs._emitter.emit( "scrollingOffset", this.vars.scrollOffsetPosition );
@@ -181,13 +183,11 @@ class Scroll {
 
     horizontal() {
         this.vars.vertical = false;
-        this.vs._emitter.emit("vertical", this.vars.vertical);
         this.resize();
     }
 
     vertical() {
         this.vars.vertical = true;
-        this.vs._emitter.emit("vertical", this.vars.vertical);
         this.resize();
     }
 
@@ -305,6 +305,7 @@ class Scroll {
         this.updateChildrenPos();
         const bounding = this.dom.section.getBoundingClientRect();
         this.vars.bounding = this.vars.vertical ? bounding.height - this.vars.height : bounding.width - this.vars.width;
+        console.log(this.vars.bounding, this.dom)
         this.vs._emitter.emit("size", { w: bounding.width + this.vars.offset, h: bounding.height + this.vars.offset });
     }
 
