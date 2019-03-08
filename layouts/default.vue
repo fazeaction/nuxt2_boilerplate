@@ -85,10 +85,10 @@
                 this.setScrollActive( false );
             },
             setSize() {
-                // console.log( this.viewportSize.w, this.viewportSize.h );
+                console.log( `Viewport Size: ${ this.viewportSize.w, this.viewportSize.h }` );
             },
             scrolling() {
-                // console.log( this.scrollPoint );
+                console.log( `Scroll value: ${ this.scrollPoint }` );
             },
             addListeners() {
                 this.enterHandler = this.entered.bind(this);

@@ -20,7 +20,7 @@
             ...mapState({
                 scrollActive: state => state.scroll.active,
                 scrollPoint: state => state.scroll.point,
-                scrollHeight: state => state.scroll.height,
+                scrollHeight: state => state.scroll.size.h,
                 viewportSize: state => state.device.viewportSize,
                 resize: state => state.device.resize
             })
@@ -39,7 +39,7 @@
                 clearTimeout( this.st );
                 this.st = setTimeout(() => {
                     this.$refs.bar.style.opacity = 0;  
-                }, 500);
+                }, 400);
             },
             scrollActive() {
                 this.setSize();

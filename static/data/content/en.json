@@ -1,22 +1,22 @@
 {
     "header": {
         "nav": [
-            { "route": { "name": "lang" }, "label": "p-index:name" },
-            { "route": { "name": "lang-about" }, "label": "p-about:name" },
+            { "route": { "name": "lang" }, "label": "p-home:name" },
+            { "route": { "name": "lang-vuex" }, "label": "p-vuex:name" },
             { "route": { "name": "lang-contact" }, "label": "p-contact:name" }
         ]
     },
     "pages": {
         "home": {
             "head": {
-                "title": "p-index:title",
-                "description": "p-index:description"
+                "title": "p-home:title",
+                "description": "p-home:description"
             }
         },
-        "about": {
+        "vuex": {
             "head": {
-                "title": "p-about:title",
-                "description": "p-about:description"
+                "title": "p-vuex:title",
+                "description": "p-vuex:description"
             }
         },
         "contact": {
