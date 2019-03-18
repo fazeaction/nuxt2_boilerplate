@@ -84,11 +84,12 @@
         padding: $menuHeight 20px 20px;
         white-space: nowrap;
         display: inline-block;
+        min-height: 100vh;
         > div {
             padding: 20px 0px;
             display: inline-block;
             vertical-align: top;
-            width: 33.333333%;
+            width: 33.333333vw;
         }
     }
 

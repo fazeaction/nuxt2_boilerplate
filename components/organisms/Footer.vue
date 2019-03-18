@@ -27,6 +27,9 @@
 
     import { mapState, mapMutations } from "vuex";
 
+    import { Events, TRANSITION_LEAVE, TRANSITION_ENTER_DONE } from "~/assets/js/controllers/Events";
+
+
     export default {
         name: "Footer",
         computed: {
@@ -46,6 +49,44 @@
             }
         },
         methods: {
+            enter() {
+                TweenLite.to(
+                    this.$el,
+                    .5,
+                    {
+                        opacity: 1,
+                        ease: Power3.easeOut,
+                        onComplete: () => {
+                            done();
+                            Events.dispatchEvent( TRANSITION_ENTER_DONE );
+                        }
+                    }
+                )
+            },
+            leave() {
+                TweenLite.to(
+                    this.$el,
+                    .25,
+                    {
+                        opacity: 0,
+                        ease: Power3.easeOut,
+                        onComplete: () => {
+                            done();
+                            Events.dispatchEvent( TRANSITION_LEAVE_DONE );
+                        }
+                    }
+                )
+            },
+            addListeners() {
+                this.enterHandler = this.enter.bind( this );
+                this.leaveHandler = this.leave.bind( this );
+                Events.addEventListener( TRANSITION_LEAVE, this.leaveHandler );
+                Events.addEventListener( TRANSITION_ENTER_DONE, this.enterHandler );
+            },
+            removeListeners() {
+                Events.removeEventListener( TRANSITION_LEAVE, this.leaveHandler );
+                Events.removeEventListener( TRANSITION_ENTER_DONE, this.enterHandler );
+            },
             ...mapMutations({
                 incrementCounter: "increment",
                 resetCounter: "reset"
