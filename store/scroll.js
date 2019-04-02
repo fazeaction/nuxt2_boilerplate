@@ -6,6 +6,8 @@ export const state = () => ({
     point: 0,
     direction: 1,
     progress: 0,
+    onTop: false,
+    onBottom: false,
     vertical: undefined,
     size: { active: 0, w: 0, h: 0 },
     screen: { w: 0, h: 0 },
@@ -43,7 +45,15 @@ export const mutations = {
         state.screen.h = size.screenH;
         state.size.active = state.vertical ? state.size.h : state.size.w;
     },
-    updateScroll() {
+    updateScroll(state) {
         state.update = !state.update;
+    },
+    setOnTop(state, value) {
+        state.onTop = value;
+        value && console.log(`Scroll on top!`);
+    },
+    setOnBottom(state, value) {
+        state.onBottom = value;
+        value && console.log(`Scroll on bottom!`);
     }
 };

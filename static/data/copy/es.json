@@ -5,11 +5,12 @@
     "p-home:name": "Home",
     "p-home:title": "Título Home",
     "p-home:description": "Descripción SEO Home.",
-    "p-home:base64:content": "La imagen está creada con un <i>Scrambler</i> que crea este tipo de imágenes a partir de una imagen nitida y un código en Base64. Puedes probarlo en el siguiente link 👇🏾.",
+    "p-home:base64:content": "La imagen está creada con un <i>Scrambler</i> que crea este tipo de imágenes a partir de una imagen nitida y un código en base64. Puedes probarlo en el siguiente link.",
 
     "p-vuex:name": "Vuex",
     "p-vuex:title": "Modulos del Store (Vuex)",
     "p-vuex:description": "Descripción SEO Vuex.",
+    "p-vuex:content": "Estos son los modulos que están disponibles en el store por defecto.",
     "p-vuex:device:title": "Dispositivo",
     "p-vuex:mouse:title": "Mouse",
     "p-vuex:lang:title": "Idiomas",
@@ -19,6 +20,7 @@
     "p-contact:name": "Contacto",
     "p-contact:title": "Título Contacto",
     "p-contact:description": "Descripción SEO Contacto.",
+    "p-contact:content": "Más info <a href='mailto: askfor@burundanga.studio'>askfor@burundanga.studio</a>.",
 
     "o-header:device": "Dispositivo",
     "o-header:assets:logo:alt": "Descripción del logo en castellano",

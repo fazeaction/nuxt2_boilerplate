@@ -11,7 +11,7 @@
             </div>
             <div class="flexGrid__cell _s" :class="{ _1: isMobile, _2: !isMobile }">
                 <p class="content" v-html="$t('p-home:base64:content')" />
-                <a href="https://github.com/cmacmillanmarin/_base64.png" rel="noopener" target="_black" v-text="`Github Repo.`" />
+                <a href="https://github.com/cmacmillanmarin/_base64.png" rel="noopener" target="_black" v-text="`👉🏾 Github Repo.`" />
             </div>
             <section-component :n="1" class="_s first-section" />
             <section-component :n="2" class="_s" />

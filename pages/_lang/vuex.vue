@@ -5,8 +5,8 @@
 <template>
     <div class="p-vuex">
         <div class="_s">
-            <h2 v-text="$t('p-vuex:title')" />
-            <p v-html="$t('p-vuex:content')" />
+            <h2 v-text="$t('p-vuex:name')" />
+            <p class="content" v-html="$t('p-vuex:content')" />
         </div>
         <div class="_s">
             <h2 v-text="$t('p-vuex:device:title')" />
@@ -99,6 +99,9 @@
             max-width: 50vw;
             &:last-child {
                 margin-right: 0;
+            }
+            .content {
+                padding-top: 20px;
             }
         }
         .a-section {

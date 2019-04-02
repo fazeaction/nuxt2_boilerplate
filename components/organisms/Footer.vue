@@ -15,7 +15,7 @@
             <div class="flexGrid__cell _3 _alignRight _end">
                 <ul>
                     <li v-for="(lang, i) in langs" :key="i">
-                        <a :href="`${ baseUrl }/${ lang }`" v-text="lang" />
+                        <a :href="`${ baseUrl }/${ lang + pathUrl }`" v-text="lang" />
                     </li>
                 </ul>
             </div>
@@ -40,7 +40,18 @@
         },
         data() {
             return {
-                baseUrl: process.env.baseUrl
+                baseUrl: process.env.baseUrl,
+                pathUrl: ""
+            }
+        },
+        watch: {
+            $route: {
+                handler: function() {
+                    this.pathUrl = "";
+                    const parts = this.$route.path.split("/");
+                    for ( let i = 2; i < parts.length; i++ ) this.pathUrl += `/${ parts[ i] }`;
+                },
+                immediate: true
             }
         },
         methods: {

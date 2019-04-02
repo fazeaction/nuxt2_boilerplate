@@ -59,16 +59,14 @@
                 this.setScrollTo( -1 );
             },
             scrollProgress() {
-                this.scrollProgress == 0 && console.log(`Scroll on Top!`);
-                this.scrollProgress == 1 && console.log(`Scroll on Bottom!`);
+                this.setOnTop( this.scrollProgress == 0 );
+                this.setOnBottom( this.scrollProgress == 1 );
             },
             verticalScroll() {
                 if ( this.verticalScroll ) {
-                    console.log("setVerticalScroll");
                     this.scroll.vertical();
                     this.$refs.scroll.classList.remove("horizontal");
                 } else {
-                    console.log("setHorizontalScroll");
                     this.scroll.horizontal();
                     this.$refs.scroll.classList.add("horizontal");
                 }
@@ -122,6 +120,8 @@
                 setScrollTo: "scroll/updateScrollTo",
                 setDirection: "scroll/setDirection",
                 setHeight: "scroll/setHeight",
+                setOnTop: "scroll/setOnTop",
+                setOnBottom: "scroll/setOnBottom",
                 incrementCounter: "increment"
             })
         },
