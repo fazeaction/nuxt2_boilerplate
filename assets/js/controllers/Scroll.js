@@ -320,7 +320,12 @@ class Scroll {
         this.updateChildrenPos();
         const bounding = this.dom.section.getBoundingClientRect();
         this.vars.bounding = this.vars.vertical ? bounding.height - this.vars.height : bounding.width - this.vars.width;
-        this.vars.size = { w: Math.floor(bounding.width + this.vars.offset), h: Math.floor(bounding.height + this.vars.offset) };
+        this.vars.size = {
+            w: Math.floor(bounding.width + this.vars.offset),
+            h: Math.floor(bounding.height + this.vars.offset),
+            screenW: this.vars.width,
+            screenH: this.vars.height
+        };
         this.vs._emitter.emit( "size", this.vars.size );
     }
 

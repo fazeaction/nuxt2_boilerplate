@@ -5,6 +5,7 @@
 <template>
     <div class="p-contact">
         <p v-text="$t( head.title )" />
+        <organism-footer class="_s" ref="footer" />
     </div>
 </template>
 
@@ -17,6 +18,8 @@
     import Head from "~/mixins/Head";
     import LifecycleHooks from "~/mixins/LifecycleHooks";
     import Transitions from "~/mixins/Transitions";
+
+    import OrganismFooter from "~/components/organisms/Footer";
 
     export default {
         name: "contact",
@@ -43,6 +46,9 @@
                 setScrollActive: "scroll/setActive",
                 setScrollDirection: "scroll/setScrollDirection"
             })
+        },
+        components: {
+            OrganismFooter
         }
     }
 
@@ -51,6 +57,7 @@
 <style lang="scss" scoped>
 
     .p-contact {
+        width: 100vw;
         padding: $menuHeight 20px 20px;
         p {
             padding: 20px 0 0;

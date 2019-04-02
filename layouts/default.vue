@@ -8,7 +8,6 @@
             <organism-header ref="header" />
             <div ref="scroll" class="__scroll">
                 <nuxt ref="page" />
-                <organism-footer class="_s" ref="footer" />
             </div>
             <scroll-bar />
         </div>
@@ -23,7 +22,6 @@
 
     import ScrollBar from "~/components/atoms/ScrollBar";
     import OrganismHeader from "~/components/organisms/Header";
-    import OrganismFooter from "~/components/organisms/Footer";
 
     import { Events, TRANSITION_ENTER_DONE, TRANSITION_LEAVE_DONE } from "~/assets/js/controllers/Events";
 
@@ -46,6 +44,9 @@
             })
         },
         watch: {
+            $route() {
+                this.incrementCounter();
+            },
             loaded() {
                 this.$nextTick( this.appStart );
             },
@@ -115,13 +116,13 @@
                 setScrollPoint: "scroll/setPoint",
                 setScrollTo: "scroll/updateScrollTo",
                 setDirection: "scroll/setDirection",
-                setHeight: "scroll/setHeight"
+                setHeight: "scroll/setHeight",
+                incrementCounter: "increment"
             })
         },
         components: {
             ScrollBar,
-            OrganismHeader,
-            OrganismFooter
+            OrganismHeader
         }
     }
 

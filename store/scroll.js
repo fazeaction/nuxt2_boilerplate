@@ -2,16 +2,18 @@
 // store/scroll.js
 
 export const state = () => ({
-    el: null,
     active: false,
     point: 0,
+    direction: 1,
+    progress: 0,
+    vertical: undefined,
+    size: { active: 0, w: 0, h: 0 },
+    screen: { w: 0, h: 0 },
+    el: null,
     update: 0,
     scrollTo: 0,
-    direction: 1,
-    vertical: undefined,
     verticalScroll: "vertical",
-    horizontalScroll: "horizontal",
-    size: { w: 0, h: 0 }
+    horizontalScroll: "horizontal"
 });
 
 export const mutations = {
@@ -20,6 +22,7 @@ export const mutations = {
     },
     setPoint(state, point) {
         state.point = point;
+        state.progress = state.vertical ? (state.point / (state.size.h - state.screen.h)) : (state.point / (state.size.w - state.screen.w));
     },
     updateScrollTo(state, point) {
         state.scrollTo = point;
@@ -36,6 +39,9 @@ export const mutations = {
     setHeight(state, size) {
         state.size.w = size.w;
         state.size.h = size.h;
+        state.screen.w = size.screenW;
+        state.screen.h = size.screenH;
+        state.size.active = state.vertical ? state.size.h : state.size.w;
     },
     updateScroll() {
         state.update = !state.update;

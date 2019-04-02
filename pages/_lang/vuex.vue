@@ -4,22 +4,25 @@
 
 <template>
     <div class="p-vuex">
-        <div class="_s"><h2 v-text="$t('p-vuex:title')" /></div>
+        <div class="_s">
+            <h2 v-text="$t('p-vuex:title')" />
+            <p v-text="$t('p-vuex:description')" />
+        </div>
         <div class="_s">
             <h2 v-text="$t('p-vuex:device:title')" />
             <pre v-html="device" />
         </div>
         <div class="_s">
-            <h2 v-text="$t('p-vuex:lang:title')" />
-            <pre v-html="lang" />
+            <h2 v-text="$t('p-vuex:scroll:title')" />
+            <pre v-html="scroll" />
         </div>
         <div class="_s">
             <h2 v-text="$t('p-vuex:mouse:title')" />
             <pre v-html="mouse" />
         </div>
         <div class="_s">
-            <h2 v-text="$t('p-vuex:scroll:title')" />
-            <pre v-html="scroll" />
+            <h2 v-text="$t('p-vuex:lang:title')" />
+            <pre v-html="lang" />
         </div>
         <section-component :n="1" class="_s" />
         <section-component :n="2" class="_s" />
@@ -36,7 +39,7 @@
     import Head from "~/mixins/Head";
     import LifecycleHooks from "~/mixins/LifecycleHooks";
     import Transitions from "~/mixins/Transitions";
-    
+
     import SectionComponent from "~/components/atoms/Section";
 
     export default {
@@ -86,7 +89,7 @@
         display: inline-block;
         min-height: 100vh;
         > div {
-            padding: 20px 0px;
+            margin: 20px 0px;
             display: inline-block;
             vertical-align: top;
             width: 33.333333vw;

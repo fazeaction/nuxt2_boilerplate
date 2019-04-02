@@ -11,8 +11,6 @@
                 </nuxt-link>
             </div>
             <div class="flexGrid__cell _2 _alignRight _end">
-                <p v-text="`${$t('o-header:device')}: ${platform}`" />
-                <p v-text="`WebGL: ${webGLSupported}`" />
                 <molecule-list :data="data.nav" />
             </div>
         </div>
@@ -32,9 +30,7 @@
             ...mapState({
                 lang: state => state.lang.locale,
                 data: state => state.content.header,
-                breakpoint: state => state.device.breakpoint,
-                platform: state => state.device.specs.platform,
-                webGLSupported: state => state.device.specs.webGLSupported
+                breakpoint: state => state.device.breakpoint
             })
         },
         watch: {

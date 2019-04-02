@@ -43,11 +43,6 @@
                 baseUrl: process.env.baseUrl
             }
         },
-        watch: {
-            $route() {
-                this.incrementCounter();
-            }
-        },
         methods: {
             enter() {
                 TweenLite.to(
@@ -88,7 +83,6 @@
                 Events.removeEventListener( TRANSITION_ENTER_DONE, this.enterHandler );
             },
             ...mapMutations({
-                incrementCounter: "increment",
                 resetCounter: "reset"
             })
         }
@@ -99,9 +93,10 @@
 <style lang="scss" scoped>
 
     .o-footer {
-        padding: 20px 20px 50px;
+        margin: 20px 0 0;
+        padding: 20px 0;
         border-top: 1px solid $lightGrey;
-        width: 100vw;
+        width: 100%;
         p, a {
             font-size: 12px;
         }

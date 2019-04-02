@@ -17,6 +17,7 @@
             <section-component :n="2" class="_s" />
             <section-component :n="3" class="_s" />
         </div>
+        <organism-footer class="_s" ref="footer" />
     </div>
 </template>
 
@@ -32,6 +33,7 @@
 
     import ImgBase from "~/components/atoms/Image";
     import SectionComponent from "~/components/atoms/Section";
+    import OrganismFooter from "~/components/organisms/Footer";
 
     export default {
         name: "index",
@@ -77,7 +79,8 @@
         },
         components: {
             ImgBase,
-            SectionComponent
+            SectionComponent,
+            OrganismFooter
         }
     }
 
@@ -86,6 +89,7 @@
 <style lang="scss" scoped>
 
     .p-home {
+        width: 100vw;
         padding: $menuHeight 20px 20px;
         h1 {
             margin: 20px 0px;

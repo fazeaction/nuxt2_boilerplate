@@ -19,8 +19,9 @@
         computed: {
             ...mapState({
                 scrollActive: state => state.scroll.active,
+                scrollProgress: state => state.scroll.progress,
                 scrollPoint: state => state.scroll.point,
-                scrollHeight: state => state.scroll.size.h,
+                scrollSize: state => state.scroll.size.active,
                 viewportSize: state => state.device.viewportSize,
                 resize: state => state.device.resize
             })
@@ -33,12 +34,11 @@
         },
         watch: {
             scrollPoint() {
-                const percentage = (this.scrollPoint % this.scrollHeight / (this.scrollHeight - this.viewportSize.h)).toFixed(2);
-                this.$refs.bar.style.transform = `translate3d( 0, ${ this.journey * percentage }px, 0 )`;
+                this.$refs.bar.style.transform = `translate3d( 0, ${ this.journey * this.scrollProgress }px, 0 )`;
                 this.$refs.bar.style.opacity = 1;
                 clearTimeout( this.st );
                 this.st = setTimeout(() => {
-                    this.$refs.bar.style.opacity = 0;  
+                    this.$refs.bar.style.opacity = 0;
                 }, 400);
             },
             scrollActive() {
@@ -50,7 +50,7 @@
         },
         methods: {
             setSize() {
-                const height = (this.viewportSize.h / this.scrollHeight) * this.viewportSize.h;
+                const height = (this.viewportSize.h / this.scrollSize) * this.viewportSize.h;
                 this.$refs.bar.style.height = `${ height }px`;
                 this.journey = this.viewportSize.h - height;
             }
