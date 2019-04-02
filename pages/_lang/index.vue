@@ -6,10 +6,10 @@
     <div class="p-home">
         <div class="flexGrid">
             <div class="flexGrid__cell _1 _s"><h1 v-text="`Nuxt2 BurundangaStudio Boilerplate`" /></div>
-            <div class="flexGrid__cell _s" :class="{ _1: isMobile, _3: !isMobile }">
+            <div class="flexGrid__cell _3 _s">
                 <img-base />
             </div>
-            <div class="flexGrid__cell _s" :class="{ _1: isMobile, _2: !isMobile }">
+            <div class="flexGrid__cell _2 _s">
                 <p class="content" v-html="$t('p-home:base64:content')" />
                 <a href="https://github.com/cmacmillanmarin/_base64.png" rel="noopener" target="_black" v-text="`👉🏾 Github Repo.`" />
             </div>
@@ -40,27 +40,17 @@
         mixins: [ Head, LifecycleHooks, Transitions ],
         computed: {
             ...mapState({
-                breakpoint: state => state.device.breakpoint,
                 vertical: state => state.scroll.verticalScroll
             })
         },
         asyncData ({ $axios, params, error }) {
             return $axios.get(`${ process.env.baseUrl }/data/content/${ params.lang }/pages/home.json`).then( res => {
                 return {
-                    head: res.data.head,
-                    isMobile: false
+                    head: res.data.head
                 }
             }).catch( e => {
                 error({ statusCode: 404, message: 'Post not found' })
             })
-        },
-        watch: {
-            breakpoint: {
-                handler: function() {
-                    this.isMobile = this.breakpoint.includes("mobile");
-                },
-                immediate: true
-            }
         },
         methods: {
             enter() {

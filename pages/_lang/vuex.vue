@@ -28,9 +28,6 @@
             <h2 v-text="$t('p-vuex:lang:title')" />
             <pre v-html="lang" />
         </div>
-        <section-component :n="1" class="_s" />
-        <section-component :n="2" class="_s" />
-        <section-component :n="3" class="_s" />
     </div>
 </template>
 
@@ -114,9 +111,6 @@
                 padding-top: 20px;
                 white-space: normal;
             }
-        }
-        .a-section {
-            width: 33vw;
         }
     }
 

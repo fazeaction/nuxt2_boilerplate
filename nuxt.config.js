@@ -14,11 +14,6 @@ Manifest.langs.forEach(lang => {
 
 module.exports = {
 
-    server: {
-        port: 3000,
-        host: "0.0.0.0"
-    },
-
     env: {
         preview: process.env.SPA,
         generate: process.env.GENERATE,
@@ -62,10 +57,7 @@ module.exports = {
             require("autoprefixer")({
                 browsers: ["last 2 versions", "ie >= 9", "Safari 8"],
             })
-        ],
-        extend(config, ctx) {
-
-        }
+        ]
     },
 
     generate: {
