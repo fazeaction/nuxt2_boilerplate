@@ -6,10 +6,10 @@
     <div class="p-home">
         <div class="flexGrid">
             <div class="flexGrid__cell _1 _s"><h1 v-text="`Nuxt2 BurundangaStudio Boilerplate`" /></div>
-            <div class="flexGrid__cell _3 _s">
+            <div class="flexGrid__cell _s _aux3">
                 <img-base />
             </div>
-            <div class="flexGrid__cell _2 _s">
+            <div class="flexGrid__cell _s _aux2">
                 <p class="content" v-html="$t('p-home:base64:content')" />
                 <a href="https://github.com/cmacmillanmarin/_base64.png" rel="noopener" target="_black" v-text="`👉🏾 Github Repo.`" />
             </div>
@@ -105,6 +105,18 @@
         }
         .first-section {
             margin-top: 40px;
+        }
+        ._aux2 {
+            width: 100%;
+            @include respond-to("tablet-portrait") {
+                width: 50%;
+            }
+        }
+        ._aux3 {
+            width: 100%;
+            @include respond-to("tablet-portrait") {
+                width: 33.333333%;
+            }
         }
     }
 

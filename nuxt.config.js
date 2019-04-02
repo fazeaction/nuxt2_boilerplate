@@ -57,7 +57,8 @@ module.exports = {
             require("autoprefixer")({
                 browsers: ["last 2 versions", "ie >= 9", "Safari 8"],
             })
-        ]
+        ],
+        extend (config, { isDev, isClient }) {}
     },
 
     generate: {
