@@ -7,7 +7,7 @@ import { detect } from "detect-browser";
 
 class Scroll {
 
-    constructor(opt = {}) {
+    constructor( opt = {} ) {
 
         this.createBound();
         this.options = opt;
@@ -35,6 +35,8 @@ class Scroll {
             prevOffsetPosition:0,
             direction: 1,
             skew: this.options.skew || false,
+            decimals: 3,
+            size: { w: 0, h: 0 }
         }
 
         this.vs = new vs({
@@ -42,23 +44,34 @@ class Scroll {
             mouseMultiplier: this.options.vs && this.options.vs.mouseMultiplier || 1,
             touchMultiplier: this.options.vs && this.options.vs.touchMultiplier || 1.5,
             firefoxMultiplier: this.options.vs && this.options.vs.firefoxMultiplier || 30,
-            preventTouch: this.options.vs && this.options.vs.preventTouch || true
+            preventTouch: this.browser.os != "Android OS"
         })
 
         this.dom = {
             section: this.options.section,
             children: []
         }
-    }
 
-    createBound() {
-        ["run", "calc", "resize", "scrollTo"]
-        .forEach((fn) => this[fn] = this[fn].bind(this));
+        this.gestures = {
+            pageX: 0,
+            initPointX: 0,
+            velPointX: 0,
+            distance: 0,
+            screenNormalizedDistance: 0,
+            pageNormalizedDistance: 0,
+            direction: 0,
+            duration: 0,
+            swipeDuration: 115,
+            lastLoopValue: 0,
+            loopInterval: 100,
+            loop: undefined
+        }
+
     }
 
     init() {
-        this.addEvents()
-        this.resize()
+        this.addEvents();
+        this.resize();
     }
 
     run() {
@@ -84,15 +97,17 @@ class Scroll {
         this.vars.scrollPosition = this.vars.current;
         this.vars.scrollOffsetPosition = this.vars.currentOffset;
 
-        if ( this.isNotUpdated() ) return;
-        
-        this.vars.direction = this.vars.scrollOffsetPosition > this.vars.prevOffsetPosition ? 1 : -1;
-
-        console.log( this.vars.current );
+        if ( this.isNotScrolling() ) {
+            this.onTop() && this.vs._emitter.emit( "scrollOnTop" );
+            this.onBottom() && this.vs._emitter.emit( "scrollOnBottom" );
+            return;
+        }
+        else if ( this.vars.scrollOffsetPosition > this.vars.prevOffsetPosition ) this.vars.direction = 1;
+        else this.vars.direction = -1;
 
         this.vs._emitter.emit( "direction", this.vars.direction );
-        this.vs._emitter.emit( "scrolling", this.vars.scrollPosition.toFixed(4) );
-        this.vs._emitter.emit( "scrollingOffset", this.vars.scrollOffsetPosition );
+        this.vs._emitter.emit( "scrolling", parseFloat(( this.vars.scrollPosition ).toFixed(this.vars.decimals)) );
+        this.vs._emitter.emit( "scrollingOffset", parseFloat(( this.vars.scrollOffsetPosition ).toFixed(this.vars.decimals)) );
         this.vs._emitter.emit( "elasticity", this.vars.elasticity );
 
         const _current = -this.vars.scrollPosition;
@@ -126,8 +141,16 @@ class Scroll {
         this.vars.prevOffsetPosition = this.vars.scrollOffsetPosition;
     }
 
-    isNotUpdated() {
-        return (this.vars.scrollPosition).toFixed(4) === (this.vars.prevPosition).toFixed(4) && (this.vars.prevOffsetPosition).toFixed(4) === (this.vars.scrollOffsetPosition).toFixed(4)
+    isNotScrolling() {
+        return (this.vars.scrollPosition).toFixed(this.vars.decimals) === (this.vars.prevPosition).toFixed(this.vars.decimals) && (this.vars.prevOffsetPosition).toFixed(this.vars.decimals) === (this.vars.scrollOffsetPosition).toFixed(this.vars.decimals);
+    }
+
+    onBottom() {
+        return Math.ceil(this.vars.target) >= Math.floor( this.vars.bounding + this.vars.offset );
+    }
+
+    onTop() {
+        return this.vars.target == 0;
     }
 
     isVerticalScroll( child ) {
@@ -145,7 +168,7 @@ class Scroll {
     }
 
     scrollTo(val, anim = false) {
-        if ( !anim ) {
+        if (!anim) {
             this.vars.current = val;
             this.vars.currentOffset = val;
             this.vs._emitter.emit("scrolling", val);
@@ -183,11 +206,13 @@ class Scroll {
 
     horizontal() {
         this.vars.vertical = false;
+        this.vs._emitter.emit("vertical", this.vars.vertical);
         this.resize();
     }
 
     vertical() {
         this.vars.vertical = true;
+        this.vs._emitter.emit("vertical", this.vars.vertical);
         this.resize();
     }
 
@@ -272,7 +297,7 @@ class Scroll {
             case "safari":
                 return .75;
             case "ios":
-                return 2;
+                return 2.25;
             default:
                 return 1;
         }
@@ -287,16 +312,6 @@ class Scroll {
         cancelAnimationFrame(this.rAF)
     }
 
-    addEvents() {
-        this.on()
-        event.on(window, "resize", this.resize)
-    }
-
-    removeEvents() {
-        this.off()
-        event.off(window, "resize", this.resize)
-    }
-
     resize( e ) {
         this.vars.height = window.innerHeight;
         this.vars.width = window.innerWidth;
@@ -305,8 +320,69 @@ class Scroll {
         this.updateChildrenPos();
         const bounding = this.dom.section.getBoundingClientRect();
         this.vars.bounding = this.vars.vertical ? bounding.height - this.vars.height : bounding.width - this.vars.width;
-        console.log(this.vars.bounding, this.dom)
-        this.vs._emitter.emit("size", { w: bounding.width + this.vars.offset, h: bounding.height + this.vars.offset });
+        this.vars.size = { w: Math.floor(bounding.width + this.vars.offset), h: Math.floor(bounding.height + this.vars.offset) };
+        this.vs._emitter.emit( "size", this.vars.size );
+    }
+
+    createBound() {
+        ["run", "calc", "resize", "scrollTo"]
+        .forEach((fn) => this[fn] = this[fn].bind(this));
+    }
+
+    addEvents() {
+        this.on();
+        event.on(window, "resize", this.resize);
+        this.onTouchMoveHandler = this.onTouchMove.bind( this );
+        this.onTouchStartHandler = this.onTouchStart.bind( this );
+        this.onTouchEndHandler = this.onTouchEnd.bind( this );
+
+        window.addEventListener("touchmove", this.onTouchMoveHandler, { passive: false });
+        window.addEventListener("touchstart", this.onTouchStartHandler, { passive: true });
+        window.addEventListener("touchend", this.onTouchEndHandler, { passive: true });
+    }
+
+    removeEvents() {
+        this.off();
+        event.off(window, "resize", this.resize);
+        window.removeEventListener("touchmove", this.onTouchMoveHandler);
+        window.removeEventListener("touchstart", this.onTouchStartHandler);
+        window.removeEventListener("touchend", this.onTouchEndHandler);
+    }
+
+    onTouchStart( e ) {
+        this.browser.os != "Android OS" && e.preventDefault();
+        if ( e.touches.length > 1 || this.disabled ) return;
+        this.checkTouchVelocity();
+        this.gestures.duration = Date.now();
+        this.gestures.initPointX = e.touches[0].pageX;
+    }
+
+    onTouchMove( e ) {
+        e.preventDefault();
+        e.stopPropagation();
+        if ( e.touches.length > 1 || this.disabled ) return;
+        const pageX = e.touches[0].pageX;
+        const newDirection = this.gestures.pageX < pageX ? 1 : -1;
+        const directionChanged = newDirection !== this.gestures.direction;
+        this.gestures.initPointX = directionChanged ? pageX : this.gestures.initPointX;
+        this.gestures.direction = newDirection;
+        this.gestures.pageX = pageX;
+        this.gestures.distance = Math.abs( this.gestures.initPointX - this.gestures.pageX );
+        this.gestures.screenNormalizedDistance = ( this.gestures.distance / this.vars.width );
+        this.gestures.pageNormalizedDistance = ( this.gestures.distance / this.vars.bounding );
+    }
+
+    onTouchEnd( e ) {
+        this.browser.os != "Android OS" && e.preventDefault();
+        clearTimeout( this.gestures.loop );
+        if ( e.touches.length > 1 || this.disabled ) return;
+        const swipe = Math.abs( this.gestures.duration - Date.now() ) < this.gestures.swipeDuration;
+    }
+
+    checkTouchVelocity() {
+        this.gestures.velPointX = Math.abs( this.gestures.lastLoopValue - this.gestures.pageX ) / this.gestures.loopInterval;
+        this.gestures.lastLoopValue = this.gestures.pageX;
+        this.gestures.loop = setTimeout( this.checkTouchVelocity.bind(this), this.gestures.loopInterval );
     }
 
     destroy() {
