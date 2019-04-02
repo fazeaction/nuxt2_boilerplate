@@ -62,7 +62,7 @@
             enter() {
                 this.setScrollDirection( this.vertical );
                 this.setScrollActive( true );
-                this.setScrollTo( 50 );
+                setTimeout( _ => { this.setScrollTo( 50 ); }, 25 );
             },
             addListeners() {
                 this.enterHandler = this.enter.bind( this );
