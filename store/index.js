@@ -3,25 +3,31 @@
 
 export const state = () => ({
     counter: 1,
-    content: {},
-    loaded: false
+    header: {},
+    footer: {}
 })
 
 export const mutations = {
-    setData( state, data ) {
-        state.content = data;
-        state.loaded = true;
-    },
     increment(state) {
         state.counter++;
     },
     reset(state) {
         state.counter = 1;
+    },
+    setHeader(state, value) {
+        state.header = value;
+    },
+    setFooter(state, value) {
+        state.footer = value;
     }
 }
 
 export const actions = {
-    async setContent({ commit, rootState }) {
-        commit('setData', await this.$axios.$get(`${ process.env.baseUrl }/data/content/${ rootState.lang.locale }.json`))
+    async nuxtServerInit({ commit, rootState }) {
+        //
+        // Set static data (non-pages data).
+        commit("images/importImages", await this.$axios.$get(`${ process.env.baseUrl }/data/content/images.json`));
+        commit("setHeader", await this.$axios.$get(`${ process.env.baseUrl }/data/content/${ rootState.lang.locale }/header.json`));
+        commit("setFooter", await this.$axios.$get(`${ process.env.baseUrl }/data/content/${ rootState.lang.locale }/footer.json`));
     }
 }

@@ -1,12 +1,18 @@
 //
 // store/images.js
 
+import Images from "~/static/data/content/images";
+
 export const state = () => ({
-    bunch: {}
+    data: {},
+    loaded: {}
 })
 
 export const mutations = {
     pushImage( state, { key, image }) {
-        state.bunch[ key ] = image;
+        state.loaded[ key ] = image;
+    },
+    importImages( state, images ) {
+        state.data = images;
     }
 }

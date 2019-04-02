@@ -1,0 +1,11 @@
+{
+    "placeholder-image": {
+        "src": "./img/placeholder/base64.png",
+        "alt": "g:placeholder-image:alt",
+        "size": {
+            "desktop": { "w": 512, "h": 512 },
+            "tablet": { "w": 512, "h": 512 },
+            "mobile": { "w": 512, "h": 512 }
+        }
+    }
+}

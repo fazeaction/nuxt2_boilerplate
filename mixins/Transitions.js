@@ -2,18 +2,19 @@
 //  components/types/mixins/Transition.js
 
 import { TweenLite } from "gsap";
-import { 
+import {
     Events,
-    TRANSITION_ENTER, 
-    TRANSITION_ENTER_DONE, 
+    TRANSITION_ENTER,
+    TRANSITION_ENTER_DONE,
     TRANSITION_LEAVE,
-    TRANSITION_LEAVE_DONE 
+    TRANSITION_LEAVE_DONE
 } from "~/assets/js/controllers/Events";
 
 export default {
     transition: {
         css: false,
         mode: "out-in",
+        appear: true,
         beforeLeave() {
             Events.dispatchEvent( TRANSITION_LEAVE );
         },

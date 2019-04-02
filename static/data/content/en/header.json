@@ -1,0 +1,7 @@
+{
+    "nav": [
+        { "route": { "name": "lang" }, "label": "p-home:name" },
+        { "route": { "name": "lang-vuex" }, "label": "p-vuex:name" },
+        { "route": { "name": "lang-contact" }, "label": "p-contact:name" }
+    ]
+}

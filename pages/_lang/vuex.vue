@@ -51,13 +51,21 @@
         mixins: [ Head, LifecycleHooks, Transitions ],
         computed: {
             ...mapState({
-                head: state => state.content.pages.vuex.head,
                 device: state => state.device,
                 lang: state => state.lang,
                 mouse: state => state.mouse,
                 images: state => state.images,
                 scroll: state => state.scroll,
                 horizontal: state => state.scroll.horizontalScroll
+            })
+        },
+        asyncData ({ $axios, params, error }) {
+            return $axios.get(`${ process.env.baseUrl }/data/content/${ params.lang }/pages/vuex.json`).then( res => {
+                return {
+                    head: res.data.head
+                }
+            }).catch( e => {
+                error({ statusCode: 404, message: 'Post not found' })
             })
         },
         methods: {

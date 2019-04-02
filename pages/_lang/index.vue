@@ -40,15 +40,19 @@
         mixins: [ Head, LifecycleHooks, Transitions ],
         computed: {
             ...mapState({
-                head: state => state.content.pages.home.head,
                 breakpoint: state => state.device.breakpoint,
                 vertical: state => state.scroll.verticalScroll
             })
         },
-        data() {
-            return {
-                isMobile: false
-            }
+        asyncData ({ $axios, params, error }) {
+            return $axios.get(`${ process.env.baseUrl }/data/content/${ params.lang }/pages/home.json`).then( res => {
+                return {
+                    head: res.data.head,
+                    isMobile: false
+                }
+            }).catch( e => {
+                error({ statusCode: 404, message: 'Post not found' })
+            })
         },
         watch: {
             breakpoint: {

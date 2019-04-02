@@ -4,13 +4,11 @@
 
 <template>
     <div class="__content">
-        <div class="__loaded" v-if="loaded">
-            <organism-header ref="header" />
-            <div ref="scroll" class="__scroll">
-                <nuxt ref="page" />
-            </div>
-            <scroll-bar />
+        <organism-header ref="header" />
+        <div ref="scroll" class="__scroll">
+            <nuxt ref="page" />
         </div>
+        <scroll-bar />
     </div>
 </template>
 
@@ -48,9 +46,6 @@
             $route() {
                 this.incrementCounter();
             },
-            loaded() {
-                this.$nextTick( this.appStart );
-            },
             updateScroll() {
                 this.scroll.resize();
             },
@@ -80,6 +75,9 @@
             }
         },
         methods: {
+            init() {
+                this.$nextTick( this.appStart );
+            },
             appStart() {
                 this.scroll = new Scroll({
                     section: this.$refs.scroll,

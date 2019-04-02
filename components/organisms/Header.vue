@@ -6,7 +6,7 @@
     <header class="o-header">
         <div class="flexGrid _horizontal">
             <div class="flexGrid__cell _2 _alignLeft">
-                <nuxt-link :to="{ name: `lang`, params: { lang }}">
+                <nuxt-link :to="{ name: `lang` }">
                     <atom-logo />
                 </nuxt-link>
             </div>
@@ -28,8 +28,7 @@
         name: "Header",
         computed: {
             ...mapState({
-                lang: state => state.lang.locale,
-                data: state => state.content.header,
+                data: state => state.header,
                 breakpoint: state => state.device.breakpoint
             })
         },
