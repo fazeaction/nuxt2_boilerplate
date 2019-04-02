@@ -4,7 +4,7 @@
 
 <template>
     <div class="p-contact">
-        <p v-text="$t( head.title )" />
+        <p v-html="$t(`p-contact:content`)" />
         <organism-footer class="_s" ref="footer" />
     </div>
 </template>

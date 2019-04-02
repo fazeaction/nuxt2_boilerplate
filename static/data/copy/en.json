@@ -5,7 +5,7 @@
     "p-home:name": "Home",
     "p-home:title": "Home title",
     "p-home:description": "Home SEO description.",
-    
+
     "p-vuex:name": "Vuex",
     "p-vuex:title": "Vuex title",
     "p-vuex:description": "Vuex SEO description.",
@@ -13,7 +13,8 @@
     "p-vuex:mouse:title": "Mouse",
     "p-vuex:lang:title": "Languages",
     "p-vuex:scroll:title": "Scroll",
-    
+    "p-vuex:images:title": "Images",
+
     "p-contact:name": "Contact",
     "p-contact:title": "Contact title",
     "p-contact:description": "Contact SEO description.",

@@ -36,6 +36,7 @@
                 scrollPoint: state => state.scroll.point,
                 scrollActive: state => state.scroll.active,
                 scrollTo: state => state.scroll.scrollTo,
+                scrollProgress: state => state.scroll.progress,
                 verticalScroll: state => state.scroll.vertical,
                 updateScroll: state => state.scroll.update,
                 breakpoint: state => state.device.breakpoint,
@@ -56,6 +57,10 @@
             scrollTo() {
                 this.scrollTo > 0 && this.scroll.scrollTo( this.scrollTo, true );
                 this.setScrollTo( -1 );
+            },
+            scrollProgress() {
+                this.scrollProgress == 0 && console.log(`Scroll on Top!`);
+                this.scrollProgress == 1 && console.log(`Scroll on Bottom!`);
             },
             verticalScroll() {
                 if ( this.verticalScroll ) {

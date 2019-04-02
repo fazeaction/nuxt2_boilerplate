@@ -6,7 +6,7 @@
     <div class="p-vuex">
         <div class="_s">
             <h2 v-text="$t('p-vuex:title')" />
-            <p v-text="$t('p-vuex:description')" />
+            <p v-html="$t('p-vuex:content')" />
         </div>
         <div class="_s">
             <h2 v-text="$t('p-vuex:device:title')" />
@@ -19,6 +19,10 @@
         <div class="_s">
             <h2 v-text="$t('p-vuex:mouse:title')" />
             <pre v-html="mouse" />
+        </div>
+        <div class="_s">
+            <h2 v-text="$t('p-vuex:images:title')" />
+            <pre v-html="images" />
         </div>
         <div class="_s">
             <h2 v-text="$t('p-vuex:lang:title')" />
@@ -51,6 +55,7 @@
                 device: state => state.device,
                 lang: state => state.lang,
                 mouse: state => state.mouse,
+                images: state => state.images,
                 scroll: state => state.scroll,
                 horizontal: state => state.scroll.horizontalScroll
             })
@@ -59,7 +64,7 @@
             enter() {
                 this.setScrollDirection( this.horizontal );
                 this.setScrollActive( true );
-                setTimeout( _ => { this.setScrollTo( 50 ); }, 25 );
+                this.$nextTick( _ => { this.setScrollTo( 50 ) });
             },
             addListeners() {
                 this.enterHandler = this.enter.bind( this );
@@ -87,12 +92,17 @@
         padding: $menuHeight 20px 20px;
         white-space: nowrap;
         display: inline-block;
-        min-height: 100vh;
         > div {
-            margin: 20px 0px;
+            margin: 20px 100px 0 0;
             display: inline-block;
             vertical-align: top;
-            width: 33.333333vw;
+            max-width: 50vw;
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        .a-section {
+            width: 33vw;
         }
     }
 

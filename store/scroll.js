@@ -22,7 +22,7 @@ export const mutations = {
     },
     setPoint(state, point) {
         state.point = point;
-        state.progress = state.vertical ? (state.point / (state.size.h - state.screen.h)) : (state.point / (state.size.w - state.screen.w));
+        state.progress = (state.vertical ? (state.point / (state.size.h - state.screen.h)) : (state.point / (state.size.w - state.screen.w))).toFixed(3);
     },
     updateScrollTo(state, point) {
         state.scrollTo = point;

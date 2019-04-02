@@ -10,10 +10,10 @@
                 <img-base />
             </div>
             <div class="flexGrid__cell _s" :class="{ _1: isMobile, _2: !isMobile }">
-                <p v-text="$t('p-home:base64:copy')" />
-                <a href="https://github.com/cmacmillanmarin/base_64" rel="noopener" target="_black" v-text="`Github Repo.`" />
+                <p class="content" v-html="$t('p-home:base64:content')" />
+                <a href="https://github.com/cmacmillanmarin/_base64.png" rel="noopener" target="_black" v-text="`Github Repo.`" />
             </div>
-            <section-component :n="1" class="_s" />
+            <section-component :n="1" class="_s first-section" />
             <section-component :n="2" class="_s" />
             <section-component :n="3" class="_s" />
         </div>
@@ -62,7 +62,7 @@
             enter() {
                 this.setScrollDirection( this.vertical );
                 this.setScrollActive( true );
-                setTimeout( _ => { this.setScrollTo( 50 ); }, 25 );
+                this.$nextTick( _ => { this.setScrollTo( 50 ) });
             },
             addListeners() {
                 this.enterHandler = this.enter.bind( this );
@@ -99,6 +99,18 @@
         }
         p, a {
             padding: 20px;
+            &.content {
+                @include respond-to("tablet-portrait") {
+                    max-width: 50%;
+                }
+            }
+
+        }
+        .a-section {
+            margin-top: 20px;
+        }
+        .first-section {
+            margin-top: 40px;
         }
     }
 

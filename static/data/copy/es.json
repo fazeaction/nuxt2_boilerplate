@@ -5,7 +5,7 @@
     "p-home:name": "Home",
     "p-home:title": "Título Home",
     "p-home:description": "Descripción SEO Home.",
-    "p-home:base64:copy": "",
+    "p-home:base64:content": "La imagen está creada con un <i>Scrambler</i> que crea este tipo de imágenes a partir de una imagen nitida y un código en Base64. Puedes probarlo en el siguiente link 👇🏾.",
 
     "p-vuex:name": "Vuex",
     "p-vuex:title": "Modulos del Store (Vuex)",
@@ -14,6 +14,7 @@
     "p-vuex:mouse:title": "Mouse",
     "p-vuex:lang:title": "Idiomas",
     "p-vuex:scroll:title": "Scroll",
+    "p-vuex:images:title": "Imágenes",
 
     "p-contact:name": "Contacto",
     "p-contact:title": "Título Contacto",

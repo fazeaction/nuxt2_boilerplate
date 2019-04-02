@@ -4,7 +4,8 @@
 
 <template>
     <div class="a-image" :class="{ cover }">
-        <img ref="img" :src="src" :alt="$t( image.alt )" />
+        <img ref="img" v-if="!svg" :src="src" :alt="$t( image.alt )" />
+        <object v-else type="image/svg+xml" :data="image.src" :aria-label="$t( image.alt )" :alt="$t( image.alt )" />
         <p class="label" v-html="`<strong>src</strong>: ${ src }`" />
     </div>
 </template>
@@ -22,7 +23,8 @@
             ...mapState({
                 images: state => state.content.images,
                 sufix: state => state.device.assetSufix,
-                resize: state => state.device.resize
+                resize: state => state.device.resize,
+                loadedImages: state => state.images.bunch
             })
         },
         props: {
@@ -73,8 +75,13 @@
                 this.setSize();
             },
             async load( path ) {
-                await loadAsset(path);
-                this.src = path;
+                if (!this.loadedImages[ cleanPath(path) ]) {
+                    const img = await loadAsset(path);
+                    this.pushImage({ key: cleanPath(path), image: img });
+                    this.src = path;
+                } else {
+                    this.src = this.loadedImages[ cleanPath(path) ].src
+                }
                 this.$nextTick( this.imageLoaded );
             },
             async imageLoaded() {
@@ -107,7 +114,10 @@
                 this.size.h = Math.ceil( this.size.h );
                 this.$refs.img.style.width = `${ this.size.w }px`;
                 this.$refs.img.style.height = `${ this.size.h }px`;
-            }
+            },
+            ...mapMutations({
+                pushImage: "images/pushImage"
+            })
         }
     }
 </script>
@@ -126,7 +136,7 @@
                 @include centerXY();
             }
         }
-        img {
+        img, object {
             border: 1px solid $lightGrey;
             width: 100%;
             display: block;

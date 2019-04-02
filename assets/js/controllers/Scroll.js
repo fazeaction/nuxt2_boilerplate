@@ -97,11 +97,7 @@ class Scroll {
         this.vars.scrollPosition = this.vars.current;
         this.vars.scrollOffsetPosition = this.vars.currentOffset;
 
-        if ( this.isNotScrolling() ) {
-            this.onTop() && this.vs._emitter.emit( "scrollOnTop" );
-            this.onBottom() && this.vs._emitter.emit( "scrollOnBottom" );
-            return;
-        }
+        if ( this.isNotScrolling() ) return;
         else if ( this.vars.scrollOffsetPosition > this.vars.prevOffsetPosition ) this.vars.direction = 1;
         else this.vars.direction = -1;
 
@@ -143,14 +139,6 @@ class Scroll {
 
     isNotScrolling() {
         return (this.vars.scrollPosition).toFixed(this.vars.decimals) === (this.vars.prevPosition).toFixed(this.vars.decimals) && (this.vars.prevOffsetPosition).toFixed(this.vars.decimals) === (this.vars.scrollOffsetPosition).toFixed(this.vars.decimals);
-    }
-
-    onBottom() {
-        return Math.ceil(this.vars.target) >= Math.floor( this.vars.bounding + this.vars.offset );
-    }
-
-    onTop() {
-        return this.vars.target == 0;
     }
 
     isVerticalScroll( child ) {
