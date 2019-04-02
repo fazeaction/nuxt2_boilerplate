@@ -50,10 +50,8 @@ export const mutations = {
     },
     setOnTop(state, value) {
         state.onTop = value;
-        value && console.log(`Scroll on top!`);
     },
     setOnBottom(state, value) {
         state.onBottom = value;
-        value && console.log(`Scroll on bottom!`);
     }
 };
