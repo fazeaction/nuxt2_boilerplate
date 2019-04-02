@@ -96,12 +96,15 @@
             margin: 20px 100px 0 0;
             display: inline-block;
             vertical-align: top;
-            max-width: 50vw;
+            white-space: wrap;
             &:last-child {
                 margin-right: 0;
             }
             .content {
+                display: block;
+                width: 250px;
                 padding-top: 20px;
+                white-space: normal;
             }
         }
         .a-section {
