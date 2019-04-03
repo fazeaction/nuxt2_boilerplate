@@ -1,0 +1,31 @@
+{
+    "en": "English",
+    "back": "Back",
+
+    "p-home:name": "Home",
+    "p-home:title": "Home title",
+    "p-home:description": "Home SEO description.",
+    "p-home:base64:content": "The image is done with an <i>Scrambler</i> which creates this kind of images from a sharp image and a base64 code. You cant test in the link below.",
+
+    "p-vuex:name": "Vuex",
+    "p-vuex:title": "Vuex title",
+    "p-vuex:description": "Vuex SEO description.",
+    "p-vuex:content": "Those are the default modules you will find in the store state.",
+    "p-vuex:device:title": "Device",
+    "p-vuex:mouse:title": "Mouse",
+    "p-vuex:lang:title": "Languages",
+    "p-vuex:scroll:title": "Scroll",
+    "p-vuex:images:title": "Images",
+
+    "p-contact:name": "Contact",
+    "p-contact:title": "Contact title",
+    "p-contact:description": "Contact SEO description.",
+    "p-contact:content": "More info <a href='mailto: askfor@burundanga.studio'>askfor@burundanga.studio</a>.",
+
+    "o-header:device": "Device",
+    "o-header:assets:logo:alt": "English logo description",
+    "o-footer:visited-pages": "Visited pages: ",
+    "o-footer:clear-history": "Clear history",
+
+    "g:placeholder-image:alt": "Base 64 placeholder image, check on github"
+}

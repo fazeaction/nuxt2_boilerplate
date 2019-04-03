@@ -11,6 +11,7 @@
     ],
     "routes": [
         "",
-        "about"
+        "vuex",
+        "contact"
     ]
 }

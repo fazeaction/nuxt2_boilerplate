@@ -21,7 +21,7 @@
         mixins: [ LifecycleHooks ],
         computed: {
             ...mapState({
-                images: state => state.images.data,
+                images: state => state.content.images,
                 sufix: state => state.device.assetSufix,
                 resize: state => state.device.resize,
                 loadedImages: state => state.images.loaded

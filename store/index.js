@@ -3,8 +3,7 @@
 
 export const state = () => ({
     counter: 1,
-    header: {},
-    footer: {}
+    content: {}
 })
 
 export const mutations = {
@@ -14,20 +13,17 @@ export const mutations = {
     reset(state) {
         state.counter = 1;
     },
-    setHeader(state, value) {
-        state.header = value;
-    },
-    setFooter(state, value) {
-        state.footer = value;
+    setContent(state, content) {
+        state.content = content;
     }
 }
 
 export const actions = {
-    async nuxtServerInit({ commit, rootState }) {
+    async nuxtServerInit({ commit }, { route }) {
         //
-        // Set static data (non-pages data).
-        commit("images/importImages", await this.$axios.$get(`${ process.env.baseUrl }/data/content/images.json`));
-        commit("setHeader", await this.$axios.$get(`${ process.env.baseUrl }/data/content/${ rootState.lang.locale }/header.json`));
-        commit("setFooter", await this.$axios.$get(`${ process.env.baseUrl }/data/content/${ rootState.lang.locale }/footer.json`));
+        // Set data
+        let lang = route.fullPath.split(`/`)[1];
+        const data = require(`~/static/data/content/${ lang }.json`);
+        commit("setContent", data );
     }
 }

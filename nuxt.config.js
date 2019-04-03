@@ -2,8 +2,8 @@ require('dotenv').config({
     path: './config/env/' + process.env.ENV_FILE
 });
 
-const Manifest = require("." + process.env.MANIFEST);
 const Config = require("." + process.env.CONFIG);
+const Manifest = require("." + process.env.MANIFEST);
 
 const routes = [];
 Manifest.langs.forEach(lang => {
@@ -21,6 +21,10 @@ module.exports = {
         baseUrl: process.env.PROTOCOL + process.env.SUBDOMAIN + process.env.DOMAIN + process.env.SUBFOLDER,
         CONFIG: process.env.CONFIG,
         MANIFEST: process.env.MANIFEST,
+    },
+
+    server: {
+        host: "0.0.0.0"
     },
 
     router: {
@@ -46,6 +50,7 @@ module.exports = {
     loading: false,
 
     build: {
+        analyze: true,
         uglify: {
             uglifyOptions: {
                 compress: {

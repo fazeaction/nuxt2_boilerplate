@@ -13,7 +13,7 @@
     export default {
         name: "Section",
         props: {
-            n: Number
+            n: String
         }
     }
 
@@ -26,7 +26,7 @@
         display: block;
         margin: 0;
         padding: 0;
-        width: 100%; 
+        width: 100%;
         height: 25vh;
         border: 1px solid $lightGrey;
         p {

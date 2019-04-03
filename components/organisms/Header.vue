@@ -28,7 +28,7 @@
         name: "Header",
         computed: {
             ...mapState({
-                data: state => state.header,
+                data: state => state.content.header,
                 breakpoint: state => state.device.breakpoint
             })
         },

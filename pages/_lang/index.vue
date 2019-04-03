@@ -13,9 +13,9 @@
                 <p class="content" v-html="$t('p-home:base64:content')" />
                 <a href="https://github.com/cmacmillanmarin/_base64.png" rel="noopener" target="_black" v-text="`👉🏾 Github Repo.`" />
             </div>
-            <section-component :n="1" class="_s first-section" />
-            <section-component :n="2" class="_s" />
-            <section-component :n="3" class="_s" />
+            <template v-for="(section , i) in page.sections">
+                <section-component :key="i" :n="section.id" class="_s"  />
+            </template>
         </div>
         <organism-footer class="_s" ref="footer" />
     </div>
@@ -40,16 +40,9 @@
         mixins: [ Head, LifecycleHooks, Transitions ],
         computed: {
             ...mapState({
+                page: state => state.content.pages.home,
+                head: state => state.content.pages.home.head,
                 vertical: state => state.scroll.verticalScroll
-            })
-        },
-        asyncData ({ $axios, params, error }) {
-            return $axios.get(`${ process.env.baseUrl }/data/content/${ params.lang }/pages/home.json`).then( res => {
-                return {
-                    head: res.data.head
-                }
-            }).catch( e => {
-                error({ statusCode: 404, message: 'Post not found' })
             })
         },
         methods: {
@@ -102,9 +95,6 @@
         }
         .a-section {
             margin-top: 20px;
-        }
-        .first-section {
-            margin-top: 40px;
         }
         ._aux2 {
             width: 100%;

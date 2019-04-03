@@ -26,17 +26,9 @@
         mixins: [ Head, LifecycleHooks, Transitions ],
         computed: {
             ...mapState({
+                page: state => state.content.pages.contact,
+                head: state => state.content.pages.contact.head,
                 vertical: state => state.scroll.verticalScroll
-            })
-        },
-        asyncData ({ $axios, params, error }) {
-            return $axios.get(`${ process.env.baseUrl }/data/content/${ params.lang }/pages/contact.json`).then( res => {
-                return {
-                    head: res.data.head,
-                    isMobile: false
-                }
-            }).catch( e => {
-                error({ statusCode: 404, message: 'Post not found' })
             })
         },
         methods: {

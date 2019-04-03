@@ -28,6 +28,9 @@
             <h2 v-text="$t('p-vuex:lang:title')" />
             <pre v-html="lang" />
         </div>
+        <template v-for="(section , i) in page.sections">
+            <section-component :key="i" :n="section.id" class="_s"  />
+        </template>
     </div>
 </template>
 
@@ -51,18 +54,11 @@
                 device: state => state.device,
                 lang: state => state.lang,
                 mouse: state => state.mouse,
-                images: state => state.images,
                 scroll: state => state.scroll,
-                horizontal: state => state.scroll.horizontalScroll
-            })
-        },
-        asyncData ({ $axios, params, error }) {
-            return $axios.get(`${ process.env.baseUrl }/data/content/${ params.lang }/pages/vuex.json`).then( res => {
-                return {
-                    head: res.data.head
-                }
-            }).catch( e => {
-                error({ statusCode: 404, message: 'Post not found' })
+                images: state => state.images,
+                horizontal: state => state.scroll.horizontalScroll,
+                page: state => state.content.pages.vuex,
+                head: state => state.content.pages.vuex.head
             })
         },
         methods: {
@@ -111,6 +107,9 @@
                 padding-top: 20px;
                 white-space: normal;
             }
+        }
+        .a-section {
+            width: 20vw;
         }
     }
 
