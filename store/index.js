@@ -23,7 +23,7 @@ export const actions = {
         //
         // Set data
         let lang = route.fullPath.split(`/`)[1];
-        const data = require(`~/static/data/content/${ lang }.json`);
+        const data = await this.$axios.$get(`./data/content/${ lang }.json`, { crossdomain: true });
         commit("setContent", data );
     }
 }

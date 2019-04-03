@@ -20,8 +20,5 @@ module.exports = {
             src: "~/assets/js/controllers/Scroll.js",
             ssr: false
         }
-    ],
-    vendor: [
-        "gsap"
     ]
 }

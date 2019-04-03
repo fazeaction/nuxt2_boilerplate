@@ -1,7 +1,6 @@
 //
 //  components/types/mixins/Transition.js
 
-import { TweenLite } from "gsap";
 import {
     Events,
     TRANSITION_ENTER,

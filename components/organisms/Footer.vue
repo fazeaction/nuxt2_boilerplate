@@ -29,7 +29,6 @@
 
     import { Events, TRANSITION_LEAVE, TRANSITION_ENTER_DONE } from "~/assets/js/controllers/Events";
 
-
     export default {
         name: "Footer",
         computed: {
