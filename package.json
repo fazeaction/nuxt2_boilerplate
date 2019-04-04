@@ -7,14 +7,14 @@
     "scripts": {
         "dev": "cross-env ENV_FILE=.env.dev nuxt",
         "spa": "cross-env ENV_FILE=.env.spa nuxt build",
-        "local-generate": "cross-env ENV_FILE=.env.local.generate nuxt generate",
-        "prod-generate": "cross-env ENV_FILE=.env.prod.generate nuxt generate",
-        "generate-server": "node static/Server.js"
+        "local-generate": "concurrently --kill-others --success \"first\" \"node assets/js/scripts/Server.js\" \"cross-env ENV_FILE=.env.local.generate nuxt generate\"",
+        "prod-generate": "cross-env ENV_FILE=.env.prod.generate nuxt generate"
     },
     "dependencies": {
         "@nuxtjs/axios": "^5.3.6",
         "@nuxtjs/pwa": "^2.6.0",
         "autoprefixer": "^9.4.7",
+        "concurrently": "^4.1.0",
         "cross-env": "^5.2.0",
         "detect-browser": "^4.1.0",
         "dom-events": "^0.1.1",

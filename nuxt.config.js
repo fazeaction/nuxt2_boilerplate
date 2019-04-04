@@ -50,7 +50,7 @@ module.exports = {
     loading: false,
 
     build: {
-        analyze: true,
+        analyze: false,
         uglify: {
             uglifyOptions: {
                 compress: {
