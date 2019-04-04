@@ -16,7 +16,7 @@ export default {
                 class: "__body"
             },
             link: [
-                { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+                { rel: "icon", type: "image/x-icon", href: `${ process.env.baseUrl }/favicon.ico` },
                 { rel: "canonical", href: `${ process.env.baseUrl }${ this.$route.path }` },
                 { rel: "publisher", href: `https://plus.google.com/${ __googleUser }` }
             ],
@@ -25,7 +25,7 @@ export default {
 
                 { hid: "viewport", name: "viewport", content: "width=device-width, initial-scale=1" },
                 { hid: "msapplication-TileColor", name: "msapplication-TileColor", content:"#ffffff" },
-                { hid: "msapplication-TileImage", name: "msapplication-TileImage", content:"/img/favicon/ms-icon-144x144.png" },
+                { hid: "msapplication-TileImage", name: "msapplication-TileImage", content:`${ process.env.baseUrl }/img/favicon/ms-icon-144x144.png` },
                 { hid: "theme-color", name: "theme-color", content:"#ffffff" },
 
                 { hid: "description", name: "description", content: this.$t( this.head.description ) },
