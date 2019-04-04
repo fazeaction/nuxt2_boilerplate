@@ -9,6 +9,6 @@
 ## Compile the code for production or staging
 This process will compile the html templates, scss & JS.
 
-- *SPA for preview:* `npm run build`
-- *Generate static files:* `npm run generate`
-
+- *SPA for preview:* `npm run spa`
+- *Generate static files locally:* `npm run local-generate`
+- *Reserved task for production generation on server:* `npm run prod-generate`
