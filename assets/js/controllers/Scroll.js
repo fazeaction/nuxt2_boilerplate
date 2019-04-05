@@ -52,21 +52,6 @@ class Scroll {
             children: []
         }
 
-        this.gestures = {
-            pageX: 0,
-            initPointX: 0,
-            velPointX: 0,
-            distance: 0,
-            screenNormalizedDistance: 0,
-            pageNormalizedDistance: 0,
-            direction: 0,
-            duration: 0,
-            swipeDuration: 115,
-            lastLoopValue: 0,
-            loopInterval: 100,
-            loop: undefined
-        }
-
     }
 
     init() {
@@ -150,7 +135,7 @@ class Scroll {
     }
 
     calc(e) {
-        const delta = e.deltaY;
+        const delta = this.vars.vertical ? e.deltaY : e.deltaX;
         this.vars.target += delta * -1 * this.vars.normalize;
         this.clampTarget()
     }
@@ -257,7 +242,7 @@ class Scroll {
     }
 
     disableScroll() {
-        this.disabled = true
+        this.disabled = true;
     }
 
     setOffset( num ) {
@@ -266,15 +251,15 @@ class Scroll {
 
     on(requestAnimationFrame = true) {
         if (this.isRAFCanceled) {
-            this.isRAFCanceled = false
+            this.isRAFCanceled = false;
         }
-        this.vs && this.vs.on(this.calc)
-        requestAnimationFrame && this.requestAnimationFrame()
+        this.vs && this.vs.on(this.calc);
+        requestAnimationFrame && this.requestAnimationFrame();
     }
 
     off(cancelAnimationFrame = true) {
         this.vs && this.vs.off(this.calc)
-        cancelAnimationFrame && this.cancelAnimationFrame()
+        cancelAnimationFrame && this.cancelAnimationFrame();
     }
 
     getNormalized() {
@@ -325,57 +310,11 @@ class Scroll {
     addEvents() {
         this.on();
         event.on(window, "resize", this.resize);
-        this.onTouchMoveHandler = this.onTouchMove.bind( this );
-        this.onTouchStartHandler = this.onTouchStart.bind( this );
-        this.onTouchEndHandler = this.onTouchEnd.bind( this );
-
-        window.addEventListener("touchmove", this.onTouchMoveHandler, { passive: false });
-        window.addEventListener("touchstart", this.onTouchStartHandler, { passive: true });
-        window.addEventListener("touchend", this.onTouchEndHandler, { passive: true });
     }
 
     removeEvents() {
         this.off();
         event.off(window, "resize", this.resize);
-        window.removeEventListener("touchmove", this.onTouchMoveHandler);
-        window.removeEventListener("touchstart", this.onTouchStartHandler);
-        window.removeEventListener("touchend", this.onTouchEndHandler);
-    }
-
-    onTouchStart( e ) {
-        this.browser.os != "Android OS" && e.preventDefault();
-        if ( e.touches.length > 1 || this.disabled ) return;
-        this.checkTouchVelocity();
-        this.gestures.duration = Date.now();
-        this.gestures.initPointX = e.touches[0].pageX;
-    }
-
-    onTouchMove( e ) {
-        e.preventDefault();
-        e.stopPropagation();
-        if ( e.touches.length > 1 || this.disabled ) return;
-        const pageX = e.touches[0].pageX;
-        const newDirection = this.gestures.pageX < pageX ? 1 : -1;
-        const directionChanged = newDirection !== this.gestures.direction;
-        this.gestures.initPointX = directionChanged ? pageX : this.gestures.initPointX;
-        this.gestures.direction = newDirection;
-        this.gestures.pageX = pageX;
-        this.gestures.distance = Math.abs( this.gestures.initPointX - this.gestures.pageX );
-        this.gestures.screenNormalizedDistance = ( this.gestures.distance / this.vars.width );
-        this.gestures.pageNormalizedDistance = ( this.gestures.distance / this.vars.bounding );
-    }
-
-    onTouchEnd( e ) {
-        this.browser.os != "Android OS" && e.preventDefault();
-        clearTimeout( this.gestures.loop );
-        if ( e.touches.length > 1 || this.disabled ) return;
-        const swipe = Math.abs( this.gestures.duration - Date.now() ) < this.gestures.swipeDuration;
-    }
-
-    checkTouchVelocity() {
-        this.gestures.velPointX = Math.abs( this.gestures.lastLoopValue - this.gestures.pageX ) / this.gestures.loopInterval;
-        this.gestures.lastLoopValue = this.gestures.pageX;
-        this.gestures.loop = setTimeout( this.checkTouchVelocity.bind(this), this.gestures.loopInterval );
     }
 
     destroy() {
