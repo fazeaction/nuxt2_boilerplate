@@ -26,4 +26,9 @@
 
 <style lang="scss" scoped>
 
+    .l-error {
+        padding: 110px 20px 20px;
+        text-align: center;
+    }
+
 </style>

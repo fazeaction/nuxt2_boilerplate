@@ -1,5 +1,5 @@
-require('dotenv').config({
-    path: './config/env/' + process.env.ENV_FILE
+require("dotenv").config({
+    path: "./config/env/" + process.env.ENV_FILE
 });
 
 const Config = require("." + process.env.CONFIG);
@@ -34,20 +34,31 @@ module.exports = {
     plugins: Config.plugins,
 
     modules: [
-        '@nuxtjs/pwa',
-        '@nuxtjs/axios',
-        '@nuxtjs/style-resources'
+        "@nuxtjs/pwa",
+        "@nuxtjs/axios",
+        "@nuxtjs/style-resources",
+        "~/modules/Routes.js"
     ],
 
     styleResources: {
         scss: [
-            'assets/css/_abs.scss'
+            "assets/css/_abs.scss"
         ]
     },
 
     css: ["@/assets/css/style.scss"],
 
     loading: false,
+
+    head: {
+        script: [
+            { src: "https://cdnjs.cloudflare.com/ajax/libs/three.js/102/three.min.js" },
+            { src: "https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.4.4/lottie.min.js" },
+            { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenLite.min.js" },
+            { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/plugins/CSSPlugin.min.js" },
+            { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/plugins/RoundPropsPlugin.min.js" }
+        ]
+    },
 
     build: {
         analyze: false,

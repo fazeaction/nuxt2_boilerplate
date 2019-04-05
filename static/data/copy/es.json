@@ -16,11 +16,16 @@
     "p-vuex:lang:title": "Idiomas",
     "p-vuex:scroll:title": "Scroll",
     "p-vuex:images:title": "Imágenes",
+    "p-page1:name": "Página 1",
+    "p-page2:name": "Página 2",
 
     "p-contact:name": "Contacto",
     "p-contact:title": "Título Contacto",
     "p-contact:description": "Descripción SEO Contacto.",
     "p-contact:content": "Más info <a href='mailto: askfor@burundanga.studio'>askfor@burundanga.studio</a>.",
+
+    "p-page:title": "Página dinámica",
+    "p-page:description": "Descripción SEO de página dinámica.",
 
     "o-header:device": "Dispositivo",
     "o-header:assets:logo:alt": "Descripción del logo en castellano",

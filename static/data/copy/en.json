@@ -22,6 +22,11 @@
     "p-contact:description": "Contact SEO description.",
     "p-contact:content": "More info <a href='mailto: askfor@burundanga.studio'>askfor@burundanga.studio</a>.",
 
+    "p-page:title": "Dynamic page",
+    "p-page:description": "Dynamic page SEO description",
+    "p-page1:name": "Page 1",
+    "p-page2:name": "Page 2",
+
     "o-header:device": "Device",
     "o-header:assets:logo:alt": "English logo description",
     "o-footer:visited-pages": "Visited pages: ",

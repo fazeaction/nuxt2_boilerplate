@@ -46,14 +46,6 @@ export default {
                 { hid: "twitter:title", name: "twitter:title", content: this.$t( this.head.title ) },
                 { hid: "twitter:description", name: "twitter:description", content: this.$t( this.head.description ) },
                 { hid: "twitter:image", name: "twitter:image", content: __twImage }
-            ],
-            script: [
-                { src: "https://cdnjs.cloudflare.com/ajax/libs/three.js/102/three.min.js" },
-                { src: "https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.4.4/lottie.min.js" },
-                { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenLite.min.js" },
-                { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/plugins/CSSPlugin.min.js" },
-                { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/plugins/RoundPropsPlugin.min.js" },
-                { src: "https://smtpjs.com/v3/smtp.js" }
             ]
         }
     }

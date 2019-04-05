@@ -1,22 +1,24 @@
 {
-    "lang": "es",
+    "lang": "en",
     "header": {
         "nav": [{
-                "route": {
-                    "name": "lang"
-                },
+                "route": "/es",
                 "label": "p-home:name"
             },
             {
-                "route": {
-                    "name": "lang-vuex"
-                },
+                "route": "/es/vuex",
                 "label": "p-vuex:name"
             },
             {
-                "route": {
-                    "name": "lang-contact"
-                },
+                "route": "/es/pagina-1",
+                "label": "p-page1:name"
+            },
+            {
+                "route": "/es/pagina-2",
+                "label": "p-page2:name"
+            },
+            {
+                "route": "/es/contacto",
                 "label": "p-contact:name"
             }
         ]
@@ -29,7 +31,8 @@
             },
             "sections": [
                 { "id": "1" },
-                { "id": "2" }
+                { "id": "2" },
+                { "id": "3" }
             ]
         },
         "vuex": {
@@ -39,9 +42,20 @@
             },
             "sections": [
                 { "id": "1" },
-                { "id": "2" },
-                { "id": "3" }
+                { "id": "2" }
             ]
+        },
+        "pagina-1": {
+            "head": {
+                "title": "p-page:title",
+                "description": "p-page:description"
+            }
+        },
+        "pagina-2": {
+            "head": {
+                "title": "p-page:title",
+                "description": "p-page:description"
+            }
         },
         "contact": {
             "head": {
