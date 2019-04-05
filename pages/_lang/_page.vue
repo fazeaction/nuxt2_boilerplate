@@ -4,11 +4,7 @@
 
 <template>
     <div class="p-page">
-        <div class="inGridLayout">
-            <div class="inContentGridLayout">
-                <p v-html="$route.params" />
-            </div>
-        </div>
+        <p v-html="$route.params" />
         <organism-footer class="_s" ref="footer" />
     </div>
 </template>

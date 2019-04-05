@@ -6,7 +6,7 @@
     <header class="o-header">
         <div class="flexGrid _horizontal">
             <div class="flexGrid__cell _2 _alignLeft">
-                <nuxt-link :to="{ name: `lang` }">
+                <nuxt-link :to="{ name: `home` }">
                     <atom-logo />
                 </nuxt-link>
             </div>
