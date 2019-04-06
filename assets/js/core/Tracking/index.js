@@ -1,7 +1,8 @@
+/* eslint-disable */
 //
 // utils/core/Tracking.js
 
-import checks from './Checks.js';
+import checks from "./Checks.js";
 
 class Tracking {
     /**
@@ -13,7 +14,7 @@ class Tracking {
         this.isVerbose = verbose;
 
         if (forceSSL && this.isEnabled && window.ga) {
-            window.ga('set', 'forceSSL', true);
+            window.ga("set", "forceSSL", true);
         }
     }
 
@@ -36,12 +37,12 @@ class Tracking {
             label
         } = event;
 
-        label = label.replace(/\{\{(.*?)\}\}/g, (match, key) => {
+        label = label.replace(/\{\{(.*?)\}\}/g, (match, key)=>{
             const param = params[key];
 
-            return param !== void 0 ?
-                param :
-                '';
+            return param !== void 0
+                ? param
+                : "";
         });
 
         if (this.isVerbose) {
@@ -49,7 +50,7 @@ class Tracking {
         }
 
         if (this.isEnabled && window.ga) {
-            window.ga('send', 'event', category, action, label);
+            window.ga("send", "event", category, action, label);
         }
     }
 
@@ -63,7 +64,7 @@ class Tracking {
         }
 
         if (this.isEnabled && window.ga) {
-            window.ga('send', 'pageview', page.page);
+            window.ga("send", "pageview", page.page);
         }
     }
 
@@ -82,8 +83,8 @@ class Tracking {
 
         if (this.isEnabled && window.dataLayer) {
             window.dataLayer.push({
-                'event': name,
-                'eventNonInteraction': interaction
+                "event": name,
+                "eventNonInteraction": interaction
             });
         }
     }
@@ -95,13 +96,13 @@ class Tracking {
      */
     trackUserClickCard(name, position) {
         if (this.isVerbose) {
-            console.log('Track User Click Card event:', name, position);
+            console.log("Track User Click Card event:", name, position);
         }
 
         if (this.isEnabled && window.dataLayer) {
             window.dataLayer.push({
-                'event': name,
-                'position': position
+                "event": name,
+                "position": position
             });
         }
     }
@@ -127,12 +128,12 @@ class Tracking {
             label
         } = event;
 
-        label = label.replace(/\{\{(.*?)\}\}/g, (match, key) => {
+        label = label.replace(/\{\{(.*?)\}\}/g, (match, key)=>{
             const param = params[key];
 
-            return param !== void 0 ?
-                param :
-                '';
+            return param !== void 0
+                ? param
+                : "";
         });
 
         if (this.isVerbose) {
@@ -141,29 +142,28 @@ class Tracking {
 
         if (this.isEnabled && window.dataLayer) {
             window.dataLayer.push({
-                'event': name,
-                'event_category': category,
-                'event_action': action,
-                'event_label': label
+                "event": name,
+                "event_category": category,
+                "event_action": action,
+                "event_label": label
             });
         }
     }
 
-
     trackDeviceType() {
         if (this.isVerbose) {
-            console.log('Track device type:', checks.desktop ? 'desktop' : 'mobile');
+            console.log("Track device type:", checks.desktop ? "desktop" : "mobile");
         }
 
         if (this.isEnabled && window.dataLayer) {
             window.dataLayer.push({
-                'device': checks.desktop ? 'desktop' : 'mobile'
+                "device": checks.desktop ? "desktop" : "mobile"
             });
         }
     }
 }
 
-const enabled = process.env.NODE_ENV !== 'development';
+const enabled = process.env.NODE_ENV !== "development";
 const verbose = !enabled;
 
 export default new Tracking(enabled, verbose, true);

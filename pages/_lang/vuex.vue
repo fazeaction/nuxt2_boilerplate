@@ -6,84 +6,90 @@
     <div class="p-vuex">
         <div class="_s">
             <h2 v-text="$t('p-vuex:name')" />
+            <!-- eslint-disable-next-line vue/no-v-html -->
             <p class="content" v-html="$t('p-vuex:content')" />
         </div>
         <div class="_s">
             <h2 v-text="$t('p-vuex:device:title')" />
+            <!-- eslint-disable-next-line vue/no-v-html -->
             <pre v-html="device" />
         </div>
         <div class="_s">
             <h2 v-text="$t('p-vuex:scroll:title')" />
+            <!-- eslint-disable-next-line vue/no-v-html -->
             <pre v-html="scroll" />
         </div>
         <div class="_s">
             <h2 v-text="$t('p-vuex:mouse:title')" />
+            <!-- eslint-disable-next-line vue/no-v-html -->
             <pre v-html="mouse" />
         </div>
         <div class="_s">
             <h2 v-text="$t('p-vuex:images:title')" />
+            <!-- eslint-disable-next-line vue/no-v-html -->
             <pre v-html="images" />
         </div>
         <div class="_s">
             <h2 v-text="$t('p-vuex:lang:title')" />
+            <!-- eslint-disable-next-line vue/no-v-html -->
             <pre v-html="lang" />
         </div>
         <template v-for="(section , i) in page.sections">
-            <section-component :key="i" :n="section.id" class="_s"  />
+            <section-component :key="i" :n="section.id" class="_s" />
         </template>
     </div>
 </template>
 
 <script>
 
-    import { mapState, mapMutations } from "vuex";
+import {mapState, mapMutations} from "vuex";
 
-    import { Events, TRANSITION_ENTER_DONE } from "~/assets/js/controllers/Events";
+import {Events, TRANSITION_ENTER_DONE} from "~/assets/js/controllers/Events";
 
-    import Head from "~/mixins/Head";
-    import LifecycleHooks from "~/mixins/LifecycleHooks";
-    import Transitions from "~/mixins/Transitions";
+import Head from "~/mixins/Head";
+import LifecycleHooks from "~/mixins/LifecycleHooks";
+import Transitions from "~/mixins/Transitions";
 
-    import SectionComponent from "~/components/atoms/Section";
+import SectionComponent from "~/components/atoms/Section";
 
-    export default {
-        name: "vuex",
-        mixins: [ Head, LifecycleHooks, Transitions ],
-        computed: {
-            ...mapState({
-                device: state => state.device,
-                lang: state => state.lang,
-                mouse: state => state.mouse,
-                scroll: state => state.scroll,
-                images: state => state.images,
-                horizontal: state => state.scroll.horizontalScroll,
-                page: state => state.content.pages.vuex,
-                head: state => state.content.pages.vuex.head
-            })
+export default {
+    name: "Vuex",
+    components: {
+        SectionComponent
+    },
+    mixins: [ Head, LifecycleHooks, Transitions ],
+    computed: {
+        ...mapState({
+            device: state=>state.device,
+            lang: state=>state.lang,
+            mouse: state=>state.mouse,
+            scroll: state=>state.scroll,
+            images: state=>state.images,
+            horizontal: state=>state.scroll.horizontalScroll,
+            page: state=>state.content.pages.vuex,
+            head: state=>state.content.pages.vuex.head
+        })
+    },
+    methods: {
+        enter() {
+            this.setScrollDirection(this.horizontal);
+            this.setScrollActive(true);
+            this.$nextTick((_)=>{ this.setScrollTo(50); });
         },
-        methods: {
-            enter() {
-                this.setScrollDirection( this.horizontal );
-                this.setScrollActive( true );
-                this.$nextTick( _ => { this.setScrollTo( 50 ) });
-            },
-            addListeners() {
-                this.enterHandler = this.enter.bind( this );
-                Events.addEventListener( TRANSITION_ENTER_DONE, this.enterHandler );
-            },
-            removeListeners() {
-                Events.removeEventListener( TRANSITION_ENTER_DONE, this.enterHandler );
-            },
-            ...mapMutations({
-                setScrollActive: "scroll/setActive",
-                setScrollDirection: "scroll/setScrollDirection",
-                setScrollTo: "scroll/updateScrollTo"
-            })
+        addListeners() {
+            this.enterHandler = this.enter.bind(this);
+            Events.addEventListener(TRANSITION_ENTER_DONE, this.enterHandler);
         },
-        components: {
-            SectionComponent
-        }
+        removeListeners() {
+            Events.removeEventListener(TRANSITION_ENTER_DONE, this.enterHandler);
+        },
+        ...mapMutations({
+            setScrollActive: "scroll/setActive",
+            setScrollDirection: "scroll/setScrollDirection",
+            setScrollTo: "scroll/updateScrollTo"
+        })
     }
+};
 
 </script>
 

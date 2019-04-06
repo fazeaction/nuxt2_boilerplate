@@ -3,10 +3,10 @@
 
 import Config from "~/config/manifest";
 
-export const state = () => ({
+export const state = ()=>({
     locales: Config.langs,
-    locale: Config.langs[0],
-})
+    locale: Config.langs[0]
+});
 
 export const mutations = {
     setLocale(state, locale) {
@@ -14,4 +14,4 @@ export const mutations = {
             state.locale = locale;
         }
     }
-}
+};

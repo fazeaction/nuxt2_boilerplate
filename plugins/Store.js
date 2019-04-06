@@ -1,7 +1,6 @@
 //
 // plugins/Store.js
 
-export default ({ store }) => {
-
+export default ({store})=>{
     store.dispatch("device/init");
-}
+};

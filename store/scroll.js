@@ -1,7 +1,7 @@
 //
 // store/scroll.js
 
-export const state = () => ({
+export const state = ()=>({
     active: false,
     point: 0,
     direction: 1,
@@ -9,8 +9,8 @@ export const state = () => ({
     onTop: false,
     onBottom: false,
     vertical: undefined,
-    size: { active: 0, w: 0, h: 0 },
-    screen: { w: 0, h: 0 },
+    size: {active: 0, w: 0, h: 0},
+    screen: {w: 0, h: 0},
     el: null,
     update: 0,
     scrollTo: 0,
@@ -36,7 +36,7 @@ export const mutations = {
         state.direction = direction;
     },
     setScrollDirection(state, value) {
-        state.vertical = value == state.verticalScroll;
+        state.vertical = value === state.verticalScroll;
     },
     setHeight(state, size) {
         state.size.w = size.w;

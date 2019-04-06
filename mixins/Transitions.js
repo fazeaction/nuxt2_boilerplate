@@ -1,6 +1,6 @@
+/* eslint-disable */
 //
 //  components/types/mixins/Transition.js
-
 import {
     Events,
     TRANSITION_ENTER,
@@ -15,39 +15,39 @@ export default {
         mode: "out-in",
         appear: true,
         beforeLeave() {
-            Events.dispatchEvent( TRANSITION_LEAVE );
+            Events.dispatchEvent(TRANSITION_LEAVE);
         },
         leave(el, done) {
             TweenLite.to(
                 el,
-                .25,
+                0.25,
                 {
                     opacity: 0,
                     ease: Power3.easeOut,
-                    onComplete: () => {
+                    onComplete: ()=>{
                         done();
-                        Events.dispatchEvent( TRANSITION_LEAVE_DONE );
+                        Events.dispatchEvent(TRANSITION_LEAVE_DONE);
                     }
                 }
-            )
+            );
         },
-        beforeEnter( el ) {
-            TweenLite.set( el, { opacity: 0 });
-            Events.dispatchEvent( TRANSITION_ENTER );
+        beforeEnter(el) {
+            TweenLite.set(el, {opacity: 0});
+            Events.dispatchEvent(TRANSITION_ENTER);
         },
         enter(el, done) {
             TweenLite.to(
                 el,
-                .5,
+                0.5,
                 {
                     opacity: 1,
                     ease: Power3.easeOut,
-                    onComplete: () => {
+                    onComplete: ()=>{
                         done();
-                        Events.dispatchEvent( TRANSITION_ENTER_DONE );
+                        Events.dispatchEvent(TRANSITION_ENTER_DONE);
                     }
                 }
-            )
+            );
         }
     }
-}
+};

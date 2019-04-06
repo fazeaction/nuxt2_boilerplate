@@ -7,11 +7,10 @@ import Config from "~/config/manifest";
 
 Vue.use(VueI18n);
 
-export default ({ app, store }) => {
+export default ({app, store})=>{
+    const messages = {};
 
-    let messages = {};
-
-    Config.langs.forEach(lang => {
+    Config.langs.forEach((lang)=>{
         messages[lang] = require("~/static/data/copy/" + lang + ".json");
     });
 
@@ -19,13 +18,13 @@ export default ({ app, store }) => {
         locale: store.state.lang.locale,
         fallbackLocale: Config.langs[0],
         messages
-    })
+    });
 
-    app.i18n.path = (link) => {
+    app.i18n.path = (link)=>{
         if (app.i18n.locale === app.i18n.fallbackLocale) {
-            return `/${link}`
+            return `/${link}`;
         }
 
-        return `/${app.i18n.locale}/${link}`
-    }
-}
+        return `/${app.i18n.locale}/${link}`;
+    };
+};

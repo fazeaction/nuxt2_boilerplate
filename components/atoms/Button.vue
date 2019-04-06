@@ -8,15 +8,15 @@
 
 <script>
 
-    export default {
-        name: "Button",
-        props: {
-            data: {
-                type: Object,
-                default: () => data
-            }
+export default {
+    name: "Button",
+    props: {
+        data: {
+            type: Object,
+            default: ()=>data // eslint-disable-line
         }
     }
+};
 
 </script>
 

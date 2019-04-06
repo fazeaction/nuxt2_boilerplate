@@ -6,13 +6,13 @@ const Config = require("." + process.env.CONFIG);
 const Manifest = require("." + process.env.MANIFEST);
 
 const routes = [];
-Manifest.langs.forEach(lang => {
-    Manifest.routes.forEach(route => {
-        routes.push(`/${ lang }/${ route }`);
+Manifest.langs.forEach((lang)=>{
+    Manifest.routes.forEach((route)=>{
+        routes.push(`/${lang}/${route}`);
     });
 });
 
-module.exports = {
+export default {
 
     env: {
         preview: process.env.SPA,
@@ -20,7 +20,7 @@ module.exports = {
         baseTitle: Manifest.head.baseTitle,
         baseUrl: process.env.PROTOCOL + process.env.SUBDOMAIN + process.env.DOMAIN + process.env.SUBFOLDER,
         CONFIG: process.env.CONFIG,
-        MANIFEST: process.env.MANIFEST,
+        MANIFEST: process.env.MANIFEST
     },
 
     server: {
@@ -28,7 +28,7 @@ module.exports = {
     },
 
     router: {
-        base: process.env.BASE,
+        base: process.env.BASE
     },
 
     plugins: Config.plugins,
@@ -52,11 +52,11 @@ module.exports = {
 
     head: {
         script: [
-            { src: "https://cdnjs.cloudflare.com/ajax/libs/three.js/102/three.min.js" },
-            { src: "https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.4.4/lottie.min.js" },
-            { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenLite.min.js" },
-            { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/plugins/CSSPlugin.min.js" },
-            { src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/plugins/RoundPropsPlugin.min.js" }
+            {src: "https://cdnjs.cloudflare.com/ajax/libs/three.js/102/three.min.js"},
+            {src: "https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.4.4/lottie.min.js"},
+            {src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/TweenLite.min.js"},
+            {src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.1/plugins/CSSPlugin.min.js"},
+            {src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/plugins/RoundPropsPlugin.min.js"}
         ]
     },
 
@@ -71,10 +71,20 @@ module.exports = {
         },
         postcss: [
             require("autoprefixer")({
-                browsers: ["last 2 versions", "ie >= 9", "Safari 8"],
+                browsers: ["last 2 versions", "ie >= 9", "Safari 8"]
             })
         ],
-        extend (config, { isDev, isClient }) {}
+        extend(config, ctx) {
+            // Run ESLint on save
+            if (ctx.isDev && ctx.isClient) {
+                config.module.rules.push({
+                    enforce: "pre",
+                    test: /\.(js|vue)$/,
+                    loader: "eslint-loader",
+                    exclude: /(node_modules)/
+                });
+            }
+        }
     },
 
     generate: {
@@ -82,4 +92,4 @@ module.exports = {
         routes: routes,
         fallback: true
     }
-}
+};

@@ -2,7 +2,6 @@
 // utils/core/EventDispatcher.js
 
 export default class EventDispatcher {
-
     addEventListener(type, listener) {
         if (this._listeners === undefined) this._listeners = {};
 
@@ -41,7 +40,6 @@ export default class EventDispatcher {
     }
 
     dispatchEvent(event, data) {
-
         const params = data ? data.params : null;
         const target = data ? data.target : null;
 
@@ -51,11 +49,10 @@ export default class EventDispatcher {
         const listenerArray = listeners[event];
 
         if (listenerArray !== undefined) {
-
             const array = listenerArray.slice(0);
 
             for (let i = 0, l = array.length; i < l; i++) {
-                array[i].call(this, { event, params, target });
+                array[i].call(this, {event, params, target});
             }
         }
     }

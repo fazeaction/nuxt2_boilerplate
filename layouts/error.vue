@@ -10,18 +10,16 @@
 
 <script>
 
-    import { mapState } from "vuex";
+import LifecycleHooks from "~/mixins/LifecycleHooks";
 
-    import LifecycleHooks from "~/mixins/LifecycleHooks";
-
-    export default {
-        mixins: [ LifecycleHooks ],
-        methods: {
-            setInitValue() {
-                console.log("ERROR")
-            }
+export default {
+    mixins: [ LifecycleHooks ],
+    methods: {
+        setInitValue() {
+            console.log("ERROR"); //
         }
     }
+};
 </script>
 
 <style lang="scss" scoped>

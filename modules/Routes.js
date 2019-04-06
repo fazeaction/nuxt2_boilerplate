@@ -1,12 +1,12 @@
 //
 //  modules/Routes.js
 
-const path = require('path');
+const path = require("path");
 
-module.exports = function () {
-    this.nuxt.options.build.createRoutes = () => {}
+module.exports = function() {
+    this.nuxt.options.build.createRoutes = ()=>{};
     this.addTemplate({
-        fileName: 'router.js',
-        src: path.resolve(`${ this.options.srcDir }`, 'config/router.js')
-    })
+        fileName: "router.js",
+        src: path.resolve(`${this.options.srcDir}`, "config/router.js")
+    });
 };

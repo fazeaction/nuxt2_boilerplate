@@ -3,14 +3,14 @@
 -->
 
 <template>
-    <img class="a-logo" src="img/logo.jpg" :alt="$t('o-header:assets:logo:alt')" />
+    <img class="a-logo" src="img/logo.jpg" :alt="$t('o-header:assets:logo:alt')">
 </template>
 
 <script>
 
-    export default {
-        name: "Logo"
-    }
+export default {
+    name: "Logo"
+};
 
 </script>
 
@@ -23,5 +23,3 @@
     }
 
 </style>
-
-

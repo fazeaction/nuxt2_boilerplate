@@ -1,10 +1,10 @@
 //
 // store/index.js
 
-export const state = () => ({
+export const state = ()=>({
     counter: 1,
     content: {}
-})
+});
 
 export const mutations = {
     increment(state) {
@@ -16,14 +16,14 @@ export const mutations = {
     setContent(state, content) {
         state.content = content;
     }
-}
+};
 
 export const actions = {
-    async nuxtServerInit({ commit }, { route }) {
+    async nuxtServerInit({commit}, {route}) {
         //
         // Set data
-        let lang = route.fullPath.split(`/`)[1];
-        const data = await this.$axios.$get(`./data/content/${ lang }.json`, { crossdomain: true });
-        commit("setContent", data );
+        const lang = route.fullPath.split("/")[1];
+        const data = await this.$axios.$get(`./data/content/${lang}.json`, {crossdomain: true});
+        commit("setContent", data);
     }
-}
+};

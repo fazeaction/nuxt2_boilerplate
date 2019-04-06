@@ -12,20 +12,20 @@
 
 <script>
 
-    import AtomButton from "~/components/atoms/Button";
+import AtomButton from "~/components/atoms/Button";
 
-    export default {
-        name: "List",
-        props: {
-            data: {
-                type: Array,
-                default: () => []
-            }
-        },
-        components: {
-            AtomButton
+export default {
+    name: "List",
+    components: {
+        AtomButton
+    },
+    props: {
+        data: {
+            type: Array,
+            default: ()=>[]
         }
     }
+};
 
 </script>
 

@@ -10,12 +10,15 @@
 
 <script>
 
-    export default {
-        name: "Section",
-        props: {
-            n: String
+export default {
+    name: "Section",
+    props: {
+        n: {
+            type: String,
+            default: ""
         }
     }
+};
 
 </script>
 
@@ -36,5 +39,3 @@
     }
 
 </style>
-
-

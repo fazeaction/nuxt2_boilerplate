@@ -1,12 +1,12 @@
 //
 // store/images.js
 
-export const state = () => ({
+export const state = ()=>({
     loaded: {}
-})
+});
 
 export const mutations = {
-    pushImage( state, { key, image }) {
+    pushImage(state, {key, image}) {
         state.loaded[ key ] = image;
     }
-}
+};

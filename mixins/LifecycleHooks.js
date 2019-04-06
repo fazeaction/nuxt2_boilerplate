@@ -13,7 +13,7 @@ export default {
         setInitValue() {},
         init() {},
         addListeners() {},
-        removeListeners()  {}
+        removeListeners() {}
     },
     beforeDestroy() {
         this.removeListeners();

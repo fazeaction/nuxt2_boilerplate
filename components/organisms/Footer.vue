@@ -25,78 +25,78 @@
 
 <script>
 
-    import { mapState, mapMutations } from "vuex";
+import {mapState, mapMutations} from "vuex";
 
-    import { Events, TRANSITION_LEAVE, TRANSITION_ENTER_DONE } from "~/assets/js/controllers/Events";
+import {Events, TRANSITION_LEAVE, TRANSITION_ENTER_DONE, TRANSITION_LEAVE_DONE} from "~/assets/js/controllers/Events";
 
-    export default {
-        name: "Footer",
-        computed: {
-            ...mapState({
-                langs: state => state.lang.locales,
-                counter: state => state.counter
-            })
-        },
-        data() {
-            return {
-                baseUrl: process.env.baseUrl,
-                pathUrl: ""
-            }
-        },
-        watch: {
-            $route: {
-                handler: function() {
-                    this.pathUrl = "";
-                    const parts = this.$route.path.split("/");
-                    for ( let i = 2; i < parts.length; i++ ) this.pathUrl += `/${ parts[ i] }`;
-                },
-                immediate: true
-            }
-        },
-        methods: {
-            enter() {
-                TweenLite.to(
-                    this.$el,
-                    .5,
-                    {
-                        opacity: 1,
-                        ease: Power3.easeOut,
-                        onComplete: () => {
-                            done();
-                            Events.dispatchEvent( TRANSITION_ENTER_DONE );
-                        }
-                    }
-                )
+export default {
+    name: "Footer",
+    data() {
+        return {
+            baseUrl: process.env.baseUrl,
+            pathUrl: ""
+        };
+    },
+    computed: {
+        ...mapState({
+            langs: state=>state.lang.locales,
+            counter: state=>state.counter
+        })
+    },
+    watch: {
+        $route: {
+            handler: function() {
+                this.pathUrl = "";
+                const parts = this.$route.path.split("/");
+                for (let i = 2; i < parts.length; i++) this.pathUrl += `/${parts[i]}`;
             },
-            leave() {
-                TweenLite.to(
-                    this.$el,
-                    .25,
-                    {
-                        opacity: 0,
-                        ease: Power3.easeOut,
-                        onComplete: () => {
-                            done();
-                            Events.dispatchEvent( TRANSITION_LEAVE_DONE );
-                        }
-                    }
-                )
-            },
-            addListeners() {
-                this.enterHandler = this.enter.bind( this );
-                this.leaveHandler = this.leave.bind( this );
-                Events.addEventListener( TRANSITION_LEAVE, this.leaveHandler );
-                Events.addEventListener( TRANSITION_ENTER_DONE, this.enterHandler );
-            },
-            removeListeners() {
-                Events.removeEventListener( TRANSITION_LEAVE, this.leaveHandler );
-                Events.removeEventListener( TRANSITION_ENTER_DONE, this.enterHandler );
-            },
-            ...mapMutations({
-                resetCounter: "reset"
-            })
+            immediate: true
         }
+    },
+    methods: {
+        enter(el, done) {
+            TweenLite.to(
+                this.$el,
+                0.5,
+                {
+                    opacity: 1,
+                    ease: Power3.easeOut,
+                    onComplete: ()=>{
+                        done();
+                        Events.dispatchEvent(TRANSITION_ENTER_DONE);
+                    }
+                }
+            );
+        },
+        leave(el, done) {
+            TweenLite.to(
+                this.$el,
+                0.25,
+                {
+                    opacity: 0,
+                    ease: Power3.easeOut,
+                    onComplete: ()=>{
+                        done();
+                        Events.dispatchEvent(TRANSITION_LEAVE_DONE);
+                    }
+                }
+            );
+        },
+        addListeners() {
+            this.enterHandler = this.enter.bind(this);
+            this.leaveHandler = this.leave.bind(this);
+            Events.addEventListener(TRANSITION_LEAVE, this.leaveHandler);
+            Events.addEventListener(TRANSITION_ENTER_DONE, this.enterHandler);
+        },
+        removeListeners() {
+            Events.removeEventListener(TRANSITION_LEAVE, this.leaveHandler);
+            Events.removeEventListener(TRANSITION_ENTER_DONE, this.enterHandler);
+        },
+        ...mapMutations({
+            resetCounter: "reset"
+        })
     }
+};
 
 </script>
 

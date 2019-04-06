@@ -19,29 +19,29 @@
 
 <script>
 
-    import { mapState } from "vuex";
+import {mapState} from "vuex";
 
-    import AtomLogo from "~/components/atoms/Logo";
-    import MoleculeList from "~/components/molecules/List";
+import AtomLogo from "~/components/atoms/Logo";
+import MoleculeList from "~/components/molecules/List";
 
-    export default {
-        name: "Header",
-        computed: {
-            ...mapState({
-                data: state => state.content.header,
-                breakpoint: state => state.device.breakpoint
-            })
-        },
-        watch: {
-            breakpoint() {
-                console.log(`Breakpoint header listener! New breakpoint :: ${this.breakpoint}`);
-            }
-        },
-        components: {
-            AtomLogo,
-            MoleculeList
+export default {
+    name: "Header",
+    components: {
+        AtomLogo,
+        MoleculeList
+    },
+    computed: {
+        ...mapState({
+            data: state=>state.content.header,
+            breakpoint: state=>state.device.breakpoint
+        })
+    },
+    watch: {
+        breakpoint() {
+            console.log(`Breakpoint header listener! New breakpoint :: ${this.breakpoint}`);
         }
     }
+};
 
 </script>
 

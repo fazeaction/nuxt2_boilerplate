@@ -8,7 +8,10 @@
         "dev": "cross-env ENV_FILE=.env.dev nuxt",
         "spa": "cross-env ENV_FILE=.env.spa nuxt build",
         "local-generate": "concurrently --kill-others --success \"first\" \"node assets/js/scripts/Server.js\" \"cross-env ENV_FILE=.env.local.generate nuxt generate\"",
-        "prod-generate": "cross-env ENV_FILE=.env.prod.generate nuxt generate"
+        "prod-generate": "cross-env ENV_FILE=.env.prod.generate nuxt generate",
+        "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+        "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
+        "precommit": "npm run lint"
     },
     "dependencies": {
         "@nuxtjs/axios": "^5.3.6",
@@ -26,10 +29,19 @@
         "vue-i18n": "^8.8.1"
     },
     "devDependencies": {
-        "@nuxtjs/style-resources": "^0.1.2",
-        "eslint-config-prettier": "^3.1.0",
-        "eslint-plugin-prettier": "2.6.2",
         "nodemon": "^1.18.9",
-        "prettier": "1.14.3"
+        "@nuxtjs/style-resources": "^0.1.2",
+        "@nuxtjs/eslint-config": "^0.0.1",
+        "babel-eslint": "^10.0.1",
+        "eslint": "^5.15.1",
+        "eslint-config-standard": ">=12.0.0",
+        "eslint-plugin-import": ">=2.16.0",
+        "eslint-plugin-jest": ">=22.3.0",
+        "eslint-plugin-node": ">=8.0.1",
+        "eslint-plugin-nuxt": ">=0.4.2",
+        "eslint-plugin-promise": ">=4.0.1",
+        "eslint-plugin-standard": ">=4.0.0",
+        "eslint-loader": "^2.1.2",
+        "eslint-plugin-vue": "^5.2.2"
     }
 }
